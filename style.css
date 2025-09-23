@@ -1,0 +1,243 @@
+/* style.css */
+
+/* 通用樣式 */
+html {
+    scroll-behavior: smooth; /* 頁內跳轉平滑滾動 */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c; /* 深色背景 */
+    color: #f7fafc; /* 淺色文字 */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #4fd1c5; /* 強調色 */
+    text-align: center;
+}
+
+a {
+    color: #4fd1c5; /* 強調色 */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #81e6d9; /* 強調色淺一點 */
+}
+
+.content-card {
+    background-color: #2d3748; /* 卡片背景色 */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+/* 導覽列 (Navbar) */
+.navbar {
+    background-color: #2d3748;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar a {
+    color: #f7fafc;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #4fd1c5;
+    color: #1a202c;
+}
+
+/* 英雄區塊 (Hero Section) */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('https://source.unsplash.com/random/1600x900/?coding,abstract'); /* 隨機圖片 */
+    background-size: cover;
+    background-position: center;
+    color: #f7fafc;
+    padding: 0 1rem;
+}
+
+.hero-section h1 {
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    color: #4fd1c5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #cbd5e0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 關於我 (About Me) */
+.about-section {
+    text-align: center;
+}
+
+.about-section h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* 專案 (Projects) */
+.projects-section {
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.projects-section h2 {
+    margin-bottom: 2rem;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-card h3 {
+    margin-top: 0;
+    color: #f7fafc;
+    font-size: 1.8rem;
+}
+
+.project-card p {
+    color: #cbd5e0;
+    flex-grow: 1; /* 讓段落佔滿剩餘空間 */
+}
+
+/* 聯絡方式 (Contact) */
+.contact-section {
+    text-align: center;
+}
+
+.contact-section h2 {
+    margin-bottom: 1.5rem;
+}
+
+.btn-email {
+    display: inline-block;
+    background-color: #4fd1c5;
+    color: #1a202c;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 1rem;
+}
+
+.btn-email:hover {
+    background-color: #81e6d9;
+    transform: translateY(-2px);
+}
+
+/* 頁尾 (Footer) */
+.footer {
+    background-color: #2d3748;
+    color: #cbd5e0;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid #4a5568;
+}
+
+.footer .social-links {
+    margin-bottom: 1rem;
+}
+
+.footer .social-links a {
+    color: #f7fafc;
+    margin: 0 1rem;
+    font-weight: 500;
+}
+
+.footer .social-links a:hover {
+    color: #4fd1c5;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 3rem;
+    }
+
+    .hero-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .navbar nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .navbar a {
+        padding: 0.8rem;
+    }
+
+    .content-card {
+        margin: 1.5rem auto;
+        padding: 1.5rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr; /* 單列佈局 */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .navbar a {
+        font-size: 0.9rem;
+    }
+}
