@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 為按鈕添加點擊事件監聽器
         sendEmailBtn.addEventListener('click', () => {
             // 定義 Email 相關資訊
-            const recipient = '[請填寫你的Email]'; // 收件人 Email 地址
+            const recipient = 'mmmax.tw@gmail.com'; // 收件人 Email 地址
             
             // Email 主旨，使用 encodeURIComponent 進行 URL 編碼，確保特殊字元正確傳遞
             const subject = encodeURIComponent('來自個人網站的聯絡'); 
