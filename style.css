@@ -147,14 +147,14 @@ a:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* 新的背景圖片設定 */
-    /* 將 'your-hero-background.jpg' 替換為你的圖片路徑 */
-    background-image: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('https://source.unsplash.com/random/1600x900/?tech,abstract,dark');
+    /* 背景圖片隨機生成，每次載入可能不同 */
+    /* 新增一個更通用的隨機背景，淺色模式也會有不同的關鍵字 */
+    background-image: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('https://source.unsplash.com/random/1600x900/?coding,abstract,technology,dark');
     background-size: cover;
     background-position: center;
     color: #f7fafc;
     padding: 0 1rem;
-    transition: background-image 0.5s ease;
+    transition: background-image 0.5s ease; /* 新增過渡效果 */
 }
 
 .hero-section h1 {
@@ -171,31 +171,38 @@ a:hover {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* 關於我 (About Me) - 修改佈局 */
+/* 關於我 (About Me) */
 .about-section {
-    text-align: center; /* 讓 H2 標題居中 */
+    text-align: center;
+    /* 修正錨點被導覽列遮住問題 */
+    scroll-margin-top: 80px; /* 依照 navbar 高度調整 */
+}
+
+.about-section h2 {
+    /* 讓 H2 出現在 content-card 外面，且保持置中 */
+    margin-bottom: 1.5rem; /* 增加 H2 與 content-card 的間距 */
 }
 
 .about-content-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr; /* 左邊 1 份，右邊 2 份 */
+    grid-template-columns: 200px 1fr; /* 左邊固定 200px 給圖片，右邊剩餘空間給文字 */
     gap: 2rem; /* 圖片和文字之間的間距 */
-    align-items: start; /* 頂部對齊 */
+    align-items: center; /* 垂直居中對齊圖片和文字 */
     max-width: 700px; /* 限制內容最大寬度 */
-    margin: 1.5rem auto 0 auto; /* 距離 H2 和居中 */
+    margin: 0 auto; /* 居中 grid 容器 */
     text-align: left; /* 讓內文左對齊 */
 }
 
 .profile-image-container {
-    width: 180px; /* 圓形圖片的寬度 */
-    height: 180px; /* 圓形圖片的高度 */
+    width: 200px; /* 圓形圖片的寬度，變大一些 */
+    height: 200px; /* 圓形圖片的高度，變大一些 */
     border-radius: 50%; /* 圓形顯示 */
     overflow: hidden; /* 隱藏超出邊界的圖片部分 */
     border: 4px solid #4fd1c5; /* 圖片邊框 */
     box-shadow: 0 0 0 6px rgba(79, 209, 197, 0.2); /* 圖片外圍光暈效果 */
-    margin: 0 auto; /* 在網格內居中 */
     flex-shrink: 0; /* 防止圖片縮小 */
     transition: transform 0.3s ease, border-color 0.3s ease;
+    /* 在網格佈局中，圖片會自動對齊，不需要 margin: auto */
 }
 
 .profile-image-container:hover {
@@ -220,6 +227,8 @@ a:hover {
     padding: 2rem 1rem;
     max-width: 1000px;
     margin: 0 auto;
+    /* 修正錨點被導覽列遮住問題 */
+    scroll-margin-top: 80px; /* 依照 navbar 高度調整 */
 }
 
 .projects-section h2 {
@@ -253,6 +262,8 @@ a:hover {
 /* 聯絡方式 (Contact) */
 .contact-section {
     text-align: center;
+    /* 修正錨點被導覽列遮住問題 */
+    scroll-margin-top: 80px; /* 依照 navbar 高度調整 */
 }
 
 .contact-section h2 {
@@ -369,7 +380,7 @@ body.light-mode .language-dropdown .dropdown-content a:hover {
 
 /* 淺色模式下英雄區塊背景 */
 body.light-mode .hero-section {
-    background-image: linear-gradient(rgba(237, 242, 247, 0.8), rgba(237, 242, 247, 0.8)), url('https://source.unsplash.com/random/1600x900/?tech,abstract,light');
+    background-image: linear-gradient(rgba(237, 242, 247, 0.8), rgba(237, 242, 247, 0.8)), url('https://source.unsplash.com/random/1600x900/?coding,abstract,technology,light');
 }
 
 body.light-mode .hero-section h1 {
@@ -466,7 +477,7 @@ body.light-mode .footer .social-links a:hover {
         text-align: center; /* 文字也居中 */
     }
     .profile-image-container {
-        margin-bottom: 1rem; /* 與下方文字的間距 */
+        margin: 0 auto 1rem auto; /* 居中並與下方文字有間距 */
     }
 
     .project-grid {
@@ -496,9 +507,5 @@ body.light-mode .footer .social-links a:hover {
     .btn-email {
         padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
-    }
-    /* 修正錨點被導覽列遮住問題 */
-    section {
-        scroll-margin-top: 100px; /* 依照 navbar 高度調整，100px 可以微調 */
     }
 }
