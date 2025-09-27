@@ -1,52 +1,6 @@
 /* style.css */
 
 /* 通用樣式 */
-:root {
-    /* 深色模式變數 */
-    --dark-bg: #1a202c; /* 極深藍灰 */
-    --dark-card-bg: #2d3748; /* 較深藍灰 */
-    --dark-text: #f7fafc; /* 淺色文字 */
-    --dark-secondary-text: #cbd5e0; /* 較淺文字 */
-    --dark-accent: #4fd1c5; /* 藍綠強調色 */
-    --dark-accent-light: #81e6d9; /* 較淺藍綠 */
-    --dark-border: #4a5568; /* 深色邊框 */
-
-    /* 淺色模式變數 */
-    --light-bg: #f7fafc; /* 淺灰白 */
-    --light-card-bg: #ffffff; /* 純白 */
-    --light-text: #2d3748; /* 深色文字 */
-    --light-secondary-text: #4a5568; /* 較深文字 */
-    --light-accent: #3182ce; /* 藍色強調色 */
-    --light-accent-light: #63b3ed; /* 較淺藍色 */
-    --light-border: #cbd5e0; /* 淺色邊框 */
-
-    /* 當前主題變數 (預設為深色) */
-    --body-bg: var(--dark-bg);
-    --text-color: var(--dark-text);
-    --secondary-text-color: var(--dark-secondary-text);
-    --heading-color: var(--dark-accent);
-    --card-bg: var(--dark-card-bg);
-    --accent-color: var(--dark-accent);
-    --accent-light-color: var(--dark-accent-light);
-    --border-color: var(--dark-border);
-    --navbar-bg: var(--dark-card-bg);
-    --shadow-color: rgba(0, 0, 0, 0.1); /* 預設深色陰影 */
-}
-
-/* 淺色模式切換 */
-body.light-mode {
-    --body-bg: var(--light-bg);
-    --text-color: var(--light-text);
-    --secondary-text-color: var(--light-secondary-text);
-    --heading-color: var(--light-accent);
-    --card-bg: var(--light-card-bg);
-    --accent-color: var(--light-accent);
-    --accent-light-color: var(--light-accent-light);
-    --border-color: var(--light-border);
-    --navbar-bg: #edf2f7; /* 淺色 navbar 略不同 */
-    --shadow-color: rgba(0, 0, 0, 0.08); /* 淺色陰影 */
-}
-
 html {
     scroll-behavior: smooth; /* 頁內跳轉平滑滾動 */
 }
@@ -55,139 +9,96 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--body-bg);
-    color: var(--text-color);
+    background-color: #1a202c; /* 深色背景 */
+    color: #f7fafc; /* 淺色文字 */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.3s ease, color 0.3s ease; /* 新增過渡效果 */
 }
 
 h1, h2, h3 {
     font-family: 'Montserrat', sans-serif;
-    color: var(--heading-color);
+    color: #4fd1c5; /* 強調色 */
     text-align: center;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-}
-
-h1 { font-size: 3.8rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.8rem; }
-
-p {
-    color: var(--secondary-text-color);
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
 }
 
 a {
-    color: var(--accent-color);
+    color: #4fd1c5; /* 強調色 */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: var(--accent-light-color);
+    color: #81e6d9; /* 強調色淺一點 */
 }
 
 .content-card {
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: 0 6px 15px var(--shadow-color);
+    background-color: #2d3748; /* 卡片背景色 */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2.5rem;
     margin: 2rem auto;
-    max-width: 900px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* 錨點調整，防止被 navbar 遮擋 */
-section {
-    padding-top: 80px; /* 給 navbar 留出空間 */
-    margin-top: -80px; /* 抵消 padding-top，讓捲軸位置正確 */
+    max-width: 800px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 新增過渡效果 */
 }
 
 /* 導覽列 (Navbar) */
 .navbar {
-    background-color: var(--navbar-bg);
+    background-color: #2d3748;
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 3px 8px var(--shadow-color);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease; /* 新增過渡效果 */
 }
 
 .navbar nav {
     display: flex;
-    justify-content: space-between; /* 讓內容兩端對齊 */
-    align-items: center;
+    justify-content: center; /* 讓連結居中 */
+    align-items: center; /* 垂直居中 */
+    gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.nav-brand {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--accent-color) !important; /* 品牌名稱強調色 */
-    transition: color 0.3s ease;
-}
-
-.nav-brand:hover {
-    color: var(--accent-light-color) !important;
-    background-color: transparent !important;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
+    padding: 0 1rem; /* 增加左右 padding */
 }
 
 .navbar a {
-    color: var(--secondary-text-color);
-    font-weight: 600;
+    color: #f7fafc;
+    font-weight: 700;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
+    border-radius: 4px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navbar a:hover {
-    background-color: var(--accent-color);
-    color: var(--body-bg); /* hover 時文字變深色 */
+    background-color: #4fd1c5;
+    color: #1a202c;
 }
 
 .navbar-right {
+    margin-left: auto; /* 將右側元素推到最右邊 */
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1rem; /* 圖標間距 */
 }
 
 .icon-button {
     background: none;
     border: none;
-    color: var(--secondary-text-color);
-    font-size: 1.3rem;
+    color: #f7fafc;
+    font-size: 1.2rem;
     cursor: pointer;
-    padding: 0.6rem;
-    border-radius: 50%; /* 圓形按鈕 */
-    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .icon-button:hover {
-    color: var(--accent-color);
-    background-color: rgba(var(--accent-color-rgb, 79, 209, 197), 0.1); /* 使用 RGB 變數 */
-    transform: translateY(-2px);
+    color: #4fd1c5;
+    background-color: rgba(255, 255, 255, 0.1);
 }
-/* 計算 RGB 變數，用於 hover 效果 */
-body:not(.light-mode) {
-    --accent-color-rgb: 79, 209, 197; /* #4fd1c5 */
-}
-body.light-mode {
-    --accent-color-rgb: 49, 130, 206; /* #3182ce */
-}
-
 
 /* 語言選擇下拉菜單 */
 .language-dropdown {
@@ -196,42 +107,37 @@ body.light-mode {
 }
 
 .language-dropdown .dropdown-content {
-    display: none;
+    display: none; /* 預設隱藏 */
     position: absolute;
-    background-color: var(--card-bg);
-    min-width: 130px;
-    box-shadow: 0px 8px 16px 0px var(--shadow-color);
+    background-color: #2d3748;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    right: 0;
-    border-radius: 8px;
+    right: 0; /* 讓下拉菜單靠右對齊按鈕 */
+    border-radius: 4px;
     overflow: hidden;
-    margin-top: 10px;
-    border: 1px solid var(--border-color);
+    margin-top: 8px; /* 與按鈕的間距 */
 }
 
-.language-dropdown:hover .dropdown-content,
-.language-dropdown.active .dropdown-content { /* 增加 active 狀態 */
+/* 鼠標懸停在 .language-dropdown 上時顯示 .dropdown-content */
+.language-dropdown:hover .dropdown-content {
     display: block;
 }
 
 .language-dropdown .dropdown-content a {
-    color: var(--text-color);
+    color: #f7fafc;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: normal;
 }
 
 .language-dropdown .dropdown-content a:hover {
-    background-color: var(--accent-color);
-    color: var(--body-bg);
+    background-color: #4fd1c5;
+    color: #1a202c;
 }
 
-.hamburger-menu {
-    display: none; /* 預設隱藏 */
-}
 
 /* 英雄區塊 (Hero Section) */
 .hero-section {
@@ -241,344 +147,358 @@ body.light-mode {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: linear-gradient(rgba(26, 32, 44, 0.7), rgba(26, 32, 44, 0.7)), url('https://source.unsplash.com/random/1600x900/?coding,workspace,minimal'); /* 深色模式背景 */
+    /* 新的背景圖片設定 */
+    /* 將 'your-hero-background.jpg' 替換為你的圖片路徑 */
+    background-image: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('https://source.unsplash.com/random/1600x900/?tech,abstract,dark');
     background-size: cover;
     background-position: center;
-    color: var(--text-color);
-    padding: 0 1.5rem;
+    color: #f7fafc;
+    padding: 0 1rem;
     transition: background-image 0.5s ease;
-}
-body.light-mode .hero-section {
-    background-image: linear-gradient(rgba(237, 242, 247, 0.7), rgba(237, 242, 247, 0.7)), url('https://source.unsplash.com/random/1600x900/?coding,workspace,minimal,light'); /* 淺色模式背景 */
-}
-
-.hero-content {
-    animation: fadeInScale 1s ease-out forwards; /* 添加動畫 */
-    opacity: 0; /* 初始隱藏 */
-    transform: scale(0.95); /* 初始縮小 */
-}
-
-@keyframes fadeInScale {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 
 .hero-section h1 {
-    font-size: 5rem;
-    margin-bottom: 0.8rem;
-    color: var(--accent-color);
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    color: #4fd1c5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.hero-section .hero-subtitle {
-    font-size: 2.2rem;
+.hero-section h2 {
+    font-size: 2rem;
     font-weight: 300;
-    color: var(--secondary-text-color);
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 2rem;
-    font-family: 'Raleway', sans-serif;
+    color: #cbd5e0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.social-links-hero {
-    margin-top: 2rem;
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-}
-
-.social-links-hero a {
-    color: var(--text-color);
-    font-size: 1.8rem;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.social-links-hero a:hover {
-    color: var(--accent-color);
-    transform: translateY(-5px);
-}
-
-
-/* 關於我 (About Me) */
+/* 關於我 (About Me) - 修改佈局 */
 .about-section {
-    text-align: center;
-    padding-top: 80px; /* 修正錨點位置 */
+    text-align: center; /* 讓 H2 標題居中 */
 }
 
-.about-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+.about-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* 左邊 1 份，右邊 2 份 */
+    gap: 2rem; /* 圖片和文字之間的間距 */
+    align-items: start; /* 頂部對齊 */
+    max-width: 700px; /* 限制內容最大寬度 */
+    margin: 1.5rem auto 0 auto; /* 距離 H2 和居中 */
+    text-align: left; /* 讓內文左對齊 */
 }
 
 .profile-image-container {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid var(--accent-color);
-    box-shadow: 0 0 0 8px rgba(var(--accent-color-rgb, 79, 209, 197), 0.2);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 180px; /* 圓形圖片的寬度 */
+    height: 180px; /* 圓形圖片的高度 */
+    border-radius: 50%; /* 圓形顯示 */
+    overflow: hidden; /* 隱藏超出邊界的圖片部分 */
+    border: 4px solid #4fd1c5; /* 圖片邊框 */
+    box-shadow: 0 0 0 6px rgba(79, 209, 197, 0.2); /* 圖片外圍光暈效果 */
+    margin: 0 auto; /* 在網格內居中 */
+    flex-shrink: 0; /* 防止圖片縮小 */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-image-container:hover {
+    transform: scale(1.05);
+    border-color: #81e6d9;
 }
 
 .profile-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* 圖片填滿容器，可能裁剪 */
     display: block;
-    transition: transform 0.3s ease;
 }
 
-.profile-image-container:hover .profile-image {
-    transform: scale(1.05);
-}
-
-.about-content p {
-    max-width: 700px;
-    text-align: left;
-    margin: 0 auto;
-}
-.about-content p:last-of-type {
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-
-/* 技能區塊 (Skills Section) */
-.skills-section {
-    padding: 3rem 1rem;
-    text-align: center;
-    background-color: var(--body-bg); /* 與 body 顏色一致 */
-    padding-top: 80px; /* 修正錨點位置 */
-}
-
-.skill-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-    background-color: var(--card-bg); /* 覆蓋 content-card 預設，讓其為 card-bg */
-}
-
-.skill-category {
-    text-align: left;
-    padding: 1.5rem;
-    border-radius: 10px;
-    background-color: var(--body-bg); /* 每個技能卡片內的背景 */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* 內陰影 */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-body.light-mode .skill-category {
-    background-color: #f0f4f8; /* 淺色模式下技能卡片內的背景 */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
-}
-
-
-.skill-category h3 {
-    text-align: left;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.skill-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-}
-
-.skill-badge {
-    background-color: rgba(var(--accent-color-rgb, 79, 209, 197), 0.15);
-    color: var(--accent-color);
-    padding: 0.6rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
-.skill-badge:hover {
-    background-color: var(--accent-color);
-    color: var(--body-bg);
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.about-text-content p {
+    margin: 0; /* 移除段落預設 margin */
 }
 
 
 /* 專案 (Projects) */
 .projects-section {
-    padding: 3rem 1rem;
-    max-width: 1200px;
+    padding: 2rem 1rem;
+    max-width: 1000px;
     margin: 0 auto;
-    padding-top: 80px; /* 修正錨點位置 */
+}
+
+.projects-section h2 {
+    margin-bottom: 2rem;
 }
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
 .project-card {
-    text-align: left;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--border-color); /* 添加邊框 */
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    border-color: var(--accent-color); /* hover 時邊框變色 */
 }
 
 .project-card h3 {
     margin-top: 0;
-    color: var(--text-color);
-    font-size: 1.7rem;
-    text-align: left;
-    margin-bottom: 1rem;
+    color: #f7fafc;
+    font-size: 1.8rem;
 }
 
 .project-card p {
-    color: var(--secondary-text-color);
-    flex-grow: 1;
-    margin-bottom: 1.5rem;
+    color: #cbd5e0;
+    flex-grow: 1; /* 讓段落佔滿剩餘空間 */
 }
-
-.project-tags {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--accent-color);
-    font-weight: 500;
-    margin-top: 1rem;
-}
-
 
 /* 聯絡方式 (Contact) */
 .contact-section {
     text-align: center;
-    padding-top: 80px; /* 修正錨點位置 */
 }
 
-.contact-section p {
-    max-width: 600px;
-    margin: 0.5rem auto 2rem auto;
-    font-size: 1.1rem;
+.contact-section h2 {
+    margin-bottom: 1.5rem;
 }
 
 /* Email 按鈕樣式 (適用於 <button> 和 <a>) */
 .btn-email {
     display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--body-bg);
-    padding: 1rem 2.5rem;
-    border-radius: 8px;
+    background-color: #4fd1c5;
+    color: #1a202c;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
     font-weight: 700;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     margin-top: 1rem;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
+    border: none; /* 移除按鈕預設邊框 */
+    cursor: pointer; /* 顯示手型游標 */
+    font-size: 1rem;
 }
 
 .btn-email:hover {
-    background-color: var(--accent-light-color);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background-color: #81e6d9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-.social-links-contact {
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap; /* 換行 */
-}
-
-.social-links-contact a {
-    color: var(--secondary-text-color);
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 25px;
-    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-}
-
-.social-links-contact a:hover {
-    color: var(--accent-color);
-    background-color: rgba(var(--accent-color-rgb, 79, 209, 197), 0.1);
-    border-color: var(--accent-color);
-    transform: translateY(-3px);
-}
-
 
 /* 頁尾 (Footer) */
 .footer {
-    background-color: var(--navbar-bg);
-    color: var(--secondary-text-color);
+    background-color: #2d3748;
+    color: #cbd5e0;
     text-align: center;
-    padding: 2.5rem 1rem;
-    margin-top: 4rem;
-    border-top: 1px solid var(--border-color);
-    transition: background-color 0.3s ease, border-top-color 0.3s ease;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid #4a5568;
+    transition: background-color 0.3s ease, border-top-color 0.3s ease; /* 新增過渡效果 */
+}
+
+.footer .social-links {
+    margin-bottom: 1rem;
+}
+
+.footer .social-links a {
+    color: #f7fafc;
+    margin: 0 1rem;
+    font-weight: 500;
+}
+
+.footer .social-links a:hover {
+    color: #4fd1c5;
 }
 
 .footer p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin: 0;
 }
 
-/* 滾動動畫效果 */
-.reveal-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform; /* 提升渲染效能 */
+/* 淺色模式樣式 */
+body.light-mode {
+    background-color: #f7fafc; /* 淺色背景 */
+    color: #2d3748; /* 深色文字 */
 }
 
-.reveal-item.visible {
-    opacity: 1;
-    transform: translateY(0);
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3 {
+    color: #3182ce; /* 淺色模式強調色 */
 }
 
+body.light-mode a {
+    color: #3182ce;
+}
+
+body.light-mode a:hover {
+    color: #63b3ed;
+}
+
+body.light-mode .navbar {
+    background-color: #edf2f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .navbar a {
+    color: #2d3748;
+}
+
+body.light-mode .navbar a:hover {
+    background-color: #3182ce;
+    color: #f7fafc;
+}
+
+body.light-mode .icon-button {
+    color: #2d3748;
+}
+
+body.light-mode .icon-button:hover {
+    color: #3182ce;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .language-dropdown .dropdown-content {
+    background-color: #edf2f7;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+}
+
+body.light-mode .language-dropdown .dropdown-content a {
+    color: #2d3748;
+}
+
+body.light-mode .language-dropdown .dropdown-content a:hover {
+    background-color: #3182ce;
+    color: #f7fafc;
+}
+
+/* 淺色模式下英雄區塊背景 */
+body.light-mode .hero-section {
+    background-image: linear-gradient(rgba(237, 242, 247, 0.8), rgba(237, 242, 247, 0.8)), url('https://source.unsplash.com/random/1600x900/?tech,abstract,light');
+}
+
+body.light-mode .hero-section h1 {
+    color: #3182ce;
+}
+
+body.light-mode .hero-section h2 {
+    color: #4a5568;
+}
+
+body.light-mode .content-card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+/* 淺色模式下個人頭像邊框 */
+body.light-mode .profile-image-container {
+    border: 4px solid #3182ce; /* 淺色模式強調色 */
+    box-shadow: 0 0 0 6px rgba(49, 130, 206, 0.2);
+}
+
+
+body.light-mode .project-card h3 {
+    color: #2d3748;
+}
+
+body.light-mode .project-card p {
+    color: #4a5568;
+}
+
+body.light-mode .btn-email {
+    background-color: #3182ce;
+    color: #f7fafc;
+}
+
+body.light-mode .btn-email:hover {
+    background-color: #63b3ed;
+    color: #ffffff;
+}
+
+body.light-mode .footer {
+    background-color: #edf2f7;
+    color: #4a5568;
+    border-top: 1px solid #cbd5e0;
+}
+
+body.light-mode .footer .social-links a {
+    color: #2d3748;
+}
+
+body.light-mode .footer .social-links a:hover {
+    color: #3182ce;
+}
 
 /* 響應式設計 */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .hero-section h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
-    .hero-section .hero-subtitle {
-        font-size: 1.8rem;
+
+    .hero-section h2 {
+        font-size: 1.5rem;
     }
-    h2 { font-size: 2.2rem; }
-    h3 { font-size: 1.6rem; }
+
+    .navbar nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .navbar a {
+        padding: 0.8rem;
+    }
+
+    .navbar-right {
+        margin-left: 0; /* 在小螢幕上取消靠右 */
+        width: 100%;
+        justify-content: center; /* 讓圖標居中 */
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1); /* 分隔線 */
+    }
+
+    body.light-mode .navbar-right {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
 
     .content-card {
-        padding: 2rem;
         margin: 1.5rem auto;
-    }
-    .project-card {
         padding: 1.5rem;
+    }
+
+    /* 關於我：小螢幕下堆疊顯示 */
+    .about-content-grid {
+        grid-template-columns: 1fr; /* 變成單列 */
+        gap: 1.5rem;
+        text-align: center; /* 文字也居中 */
+    }
+    .profile-image-container {
+        margin-bottom: 1rem; /* 與下方文字的間距 */
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr; /* 單列佈局 */
+    }
+
+    .language-dropdown .dropdown-content {
+        right: auto; /* 在小螢幕上取消靠右，讓它在按鈕下方 */
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
-
-@media (max-width: 768px) {
-    .hero-section {
-        height: 80vh; /* 調整英雄區塊高度 */
-    }
+@media (max-width: 480px) {
     .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .navbar a {
+        font-size: 0.9rem;
+    }
+
+    .btn-email {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    /* 修正錨點被導覽列遮住問題 */
+    section {
+        scroll-margin-top: 100px; /* 依照 navbar 高度調整，100px 可以微調 */
+    }
+}
