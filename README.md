@@ -1,16 +1,19 @@
-## Hi there 👋
+# Max98122 Personal Website
 
-<!--
-**Max98122/Max98122** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Hi! Welcome to my personal website. 🌟  
 
-Here are some ideas to get you started:
+This site showcases my projects, skills, and learning journey as a student and developer. I explore areas like:
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- Frontend Development (HTML, CSS, JavaScript)  
+- 3D Modeling & Printing  
+- Information Security  
+
+## 🚀 What You Can Find Here
+- **Portfolio Projects**: Interactive demos and hands-on work  
+- **Skills Overview**: Tools and technologies I use  
+- **Contact Info**: Connect with me via GitHub, Discord, or email  
+
+## 🌐 Visit & Explore
+Check out the live site here: [Max98122 Website](https://xyllence0122.github.io/Max98122/)  
+
+Thanks for visiting! Hope you enjoy exploring my projects. 😊
