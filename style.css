@@ -251,4 +251,8 @@ a:hover {
         padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
     }
+    /* 修正錨點被導覽列遮住問題 */
+    #about, #projects, #contact {
+    scroll-margin-top: 100px; /* 依照 navbar 高度調整，100px 可以微調 */
+    }
 }
