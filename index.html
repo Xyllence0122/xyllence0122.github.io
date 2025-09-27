@@ -40,20 +40,22 @@
         <h2 data-lang-key="heroSubtitle">一位熱愛學習與挑戰的工程師</h2>
     </section>
 
-    <section id="about" class="about-section content-card">
+    <!-- 關於我區塊 - 移除 content-card class，讓 H2 在外面 -->
+    <section id="about" class="about-section">
         <h2 data-lang-key="aboutTitle">關於我</h2>
-        <div class="about-content-grid"> <!-- 新增一個 grid 容器 -->
-            <div class="profile-image-container">
-                <!-- 請將 'assets/profile.jpg' 替換為你的圖片路徑，並確保圖片存在 -->
-                <!-- 圖片大小最好是正方形，例如 300x300 像素，方便圓形顯示 -->
-                <img src="https://via.placeholder.com/300" alt="陳兆臨個人頭像" class="profile-image">
-            </div>
-            <div class="about-text-content"> <!-- 內文容器 -->
-                <p data-lang-key="aboutContent">
-                    哈囉！我是陳兆臨，目前就讀於國立臺北科技大學智慧自動化工程系五年一貫學程二年級。
-                    我喜歡在不同領域中挑戰自己學習，從前端開發到資訊安全，甚至是3D建模與語言學習都是我探索的範圍。
-                    透過不斷的練習與嘗試，我希望能將程式設計、創意與工程思維結合，創造出兼具功能性與美學的作品，並持續拓展自己的可能性。
-                </p>
+        <div class="content-card"> <!-- 內文放在 card 裡 -->
+            <div class="about-content-grid">
+                <div class="profile-image-container">
+                    <!-- 請將 'https://via.placeholder.com/300' 替換為你的圖片路徑，並確保圖片存在 -->
+                    <img src="https://via.placeholder.com/300" alt="陳兆臨個人頭像" class="profile-image">
+                </div>
+                <div class="about-text-content">
+                    <p data-lang-key="aboutContent">
+                        哈囉！我是陳兆臨，目前就讀於國立臺北科技大學智慧自動化工程系五年一貫學程二年級。
+                        我喜歡在不同領域中挑戰自己學習，從前端開發到資訊安全，甚至是3D建模與語言學習都是我探索的範圍。
+                        透過不斷的練習與嘗試，我希望能將程式設計、創意與工程思維結合，創造出兼具功能性與美學的作品，並持續拓展自己的可能性。
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -96,9 +98,8 @@
     <footer class="footer">
         <div class="social-links">
             <a href="https://github.com/mmmax-tw" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <!-- LinkedIn 已移除 -->
-            <!-- 您可以添加更多社群連結，例如 Discord: -->
-            <!-- <a href="#" target="_blank"><i class="fab fa-discord"></i> Discord</a> -->
+            <!-- 新增 Discord 連結 -->
+            <a href="你的Discord邀請連結或用戶名" target="_blank"><i class="fab fa-discord"></i> Discord</a>
         </div>
         <p data-lang-key="footerText">&copy; 2023 陳兆臨. All rights reserved.</p>
     </footer>
