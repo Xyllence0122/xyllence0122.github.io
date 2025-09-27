@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陳兆臨 - 個人介紹</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>陳兆臨 - 個人作品集</title>
+    <!-- Google Fonts - Montserrat for headings, Roboto for body, Raleway for elegant touch -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500;700&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- 引入外部 CSS 檔案 -->
@@ -14,14 +14,17 @@
 <body>
     <div class="navbar">
         <nav>
-            <a href="#about" data-lang-key="navAbout">關於我</a>
-            <a href="#projects" data-lang-key="navProjects">專案</a>
-            <a href="#contact" data-lang-key="navContact">聯絡我</a>
+            <a href="#hero" class="nav-brand" data-lang-key="navBrand">陳兆臨</a>
+            <div class="nav-links">
+                <a href="#about" data-lang-key="navAbout">關於我</a>
+                <a href="#skills" data-lang-key="navSkills">技能</a>
+                <a href="#projects" data-lang-key="navProjects">專案</a>
+                <a href="#contact" data-lang-key="navContact">聯絡我</a>
+            </div>
             <div class="navbar-right">
                 <!-- 淺色/深色模式切換 -->
-                <!-- 初始圖標由 JS 決定，這裡先給一個預設，JS 會根據 localStorage 覆寫 -->
                 <button id="themeToggle" class="icon-button">
-                    <i class="fas fa-sun"></i> <!-- 假設初始為深色模式，點擊切換到淺色模式 -->
+                    <i class="fas fa-sun"></i>
                 </button>
                 <!-- 語言選擇 -->
                 <div class="language-dropdown">
@@ -32,63 +35,125 @@
                     </div>
                 </div>
             </div>
+             <button class="hamburger-menu icon-button"><i class="fas fa-bars"></i></button>
         </nav>
     </div>
 
-    <section class="hero-section">
-        <h1 data-lang-key="heroTitle">陳兆臨</h1>
-        <h2 data-lang-key="heroSubtitle">一位熱愛學習與挑戰的工程師</h2>
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 data-lang-key="heroTitle">陳兆臨</h1>
+            <p class="hero-subtitle" data-lang-key="heroSubtitle">一位熱愛學習與挑戰的工程師</p>
+            <div class="social-links-hero">
+                <a href="https://github.com/mmmax-tw" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
     </section>
 
-    <section id="about" class="about-section content-card">
+    <section id="about" class="about-section content-card reveal-item">
         <h2 data-lang-key="aboutTitle">關於我</h2>
-        <p data-lang-key="aboutContent">
-            哈囉！我是陳兆臨，目前就讀於國立臺北科技大學智慧自動化工程系五年一貫學程二年級。
-            我喜歡在不同領域中挑戰自己學習，從前端開發到資訊安全，甚至是3D建模與語言學習都是我探索的範圍。
-            透過不斷的練習與嘗試，我希望能將程式設計、創意與工程思維結合，創造出兼具功能性與美學的作品，並持續拓展自己的可能性。
-        </p>
+        <div class="about-content">
+            <div class="profile-image-container">
+                <img src="assets/profile.jpg" alt="陳兆臨個人頭像" class="profile-image">
+            </div>
+            <p data-lang-key="aboutContent">
+                哈囉！我是陳兆臨，目前就讀於國立臺北科技大學智慧自動化工程系五年一貫學程二年級。
+                我喜歡在不同領域中挑戰自己學習，從前端開發到資訊安全，甚至是3D建模與語言學習都是我探索的範圍。
+                透過不斷的練習與嘗試，我希望能將程式設計、創意與工程思維結合，創造出兼具功能性與美學的作品，並持續拓展自己的可能性。
+            </p>
+            <p data-lang-key="aboutMission">
+                我的目標是成為一位全方位且具備解決問題能力的工程師，持續精進技術，並將所學應用於實際專案中，創造價值。
+            </p>
+        </div>
+    </section>
+
+    <section id="skills" class="skills-section reveal-item">
+        <h2 data-lang-key="skillsTitle">技能</h2>
+        <div class="skill-grid content-card">
+            <div class="skill-category">
+                <h3 data-lang-key="skillCat1">程式語言與框架</h3>
+                <div class="skill-list">
+                    <span class="skill-badge"><i class="fab fa-html5"></i> HTML5</span>
+                    <span class="skill-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
+                    <span class="skill-badge"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
+                    <span class="skill-badge"><i class="fab fa-react"></i> React (Basic)</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3 data-lang-key="skillCat2">工具與技術</h3>
+                <div class="skill-list">
+                    <span class="skill-badge"><i class="fab fa-git-alt"></i> Git</span>
+                    <span class="skill-badge"><i class="fab fa-github"></i> GitHub</span>
+                    <span class="skill-badge"><i class="fas fa-cube"></i> Fusion 360</span>
+                    <span class="skill-badge"><i class="fas fa-print"></i> 3D Printing</span>
+                    <span class="skill-badge"><i class="fas fa-shield-alt"></i> Info Security (Basic)</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3 data-lang-key="skillCat3">軟實力</h3>
+                <div class="skill-list">
+                    <span class="skill-badge"><i class="fas fa-lightbulb"></i> Problem Solving</span>
+                    <span class="skill-badge"><i class="fas fa-users"></i> Teamwork</span>
+                    <span class="skill-badge"><i class="fas fa-book"></i> Fast Learner</span>
+                    <span class="skill-badge"><i class="fas fa-comment-dots"></i> Communication</span>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="projects" class="projects-section">
         <h2 data-lang-key="projectsTitle">專案</h2>
         <div class="project-grid">
-            <div class="content-card project-card">
+            <a href="#" class="content-card project-card reveal-item">
                 <h3 data-lang-key="project1Title">個人網站建置</h3>
                 <p data-lang-key="project1Content">
                     這個網站就是我的第一個主要專案，透過 HTML, CSS 和 JavaScript 從零開始建置，
                     學習了網頁基本結構、樣式設計與互動功能。
                 </p>
-            </div>
-            <div class="content-card project-card">
+                <span class="project-tags">#HTML #CSS #JavaScript #ResponsiveDesign</span>
+            </a>
+            <a href="#" class="content-card project-card reveal-item">
                 <h3 data-lang-key="project2Title">3D建模與列印</h3>
                 <p data-lang-key="project2Content">
                     利用 Fusion 360 進行多項零件設計與組裝，並結合 3D 列印技術將設計實體化，
                     從中學習了產品設計流程與機械結構。
                 </p>
-            </div>
-            <div class="content-card project-card">
+                <span class="project-tags">#Fusion360 #3DPrinting #ProductDesign</span>
+            </a>
+            <a href="#" class="content-card project-card reveal-item">
                 <h3 data-lang-key="project3Title">基礎資訊安全實踐</h3>
                 <p data-lang-key="project3Content">
                     參與資訊安全社團並學習基本資安概念，包含弱點掃描、滲透測試基礎等，
                     提升了對網路安全的認識與實作能力。
                 </p>
-            </div>
+                <span class="project-tags">#InfoSec #VulnerabilityScanning #PenetrationTesting</span>
+            </a>
+             <a href="#" class="content-card project-card reveal-item">
+                <h3 data-lang-key="project4Title">更多專案...</h3>
+                <p data-lang-key="project4Content">
+                    未來將會持續更新更多有趣且具挑戰性的專案，敬請期待！
+                </p>
+                <span class="project-tags">#Learning #Innovation #FutureProjects</span>
+            </a>
         </div>
     </section>
 
-    <section id="contact" class="contact-section content-card">
+    <section id="contact" class="contact-section content-card reveal-item">
         <h2 data-lang-key="contactTitle">聯絡我</h2>
         <p data-lang-key="contactDescription">
-            歡迎透過 Email 與我聯繫！
+            期待與您交流！如果您有任何問題、合作機會或只是想打個招呼，歡迎透過 Email 與我聯繫。
         </p>
         <button id="sendEmailBtn" class="btn-email" data-lang-key="contactBtn">寄送 Email</button>
+        <div class="social-links-contact">
+             <a href="https://github.com/mmmax-tw" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            <a href="#" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i> Discord</a>
+        </div>
     </section>
 
     <footer class="footer">
-        <div class="social-links">
-            <a href="https://github.com/mmmax-tw" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <!-- 您可以添加更多社群連結 -->
-        </div>
         <p data-lang-key="footerText">&copy; 2023 陳兆臨. All rights reserved.</p>
     </footer>
 
