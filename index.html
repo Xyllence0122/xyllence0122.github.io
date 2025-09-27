@@ -19,8 +19,9 @@
             <a href="#contact" data-lang-key="navContact">聯絡我</a>
             <div class="navbar-right">
                 <!-- 淺色/深色模式切換 -->
+                <!-- 初始圖標由 JS 決定，這裡先給一個預設，JS 會根據 localStorage 覆寫 -->
                 <button id="themeToggle" class="icon-button">
-                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i> <!-- 假設初始為深色模式，點擊切換到淺色模式 -->
                 </button>
                 <!-- 語言選擇 -->
                 <div class="language-dropdown">
