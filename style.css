@@ -107,7 +107,7 @@ a:hover {
 }
 
 .language-dropdown .dropdown-content {
-    display: none;
+    display: none; /* 預設隱藏 */
     position: absolute;
     background-color: #2d3748;
     min-width: 120px;
@@ -117,6 +117,11 @@ a:hover {
     border-radius: 4px;
     overflow: hidden;
     margin-top: 8px; /* 與按鈕的間距 */
+}
+
+/* 鼠標懸停在 .language-dropdown 上時顯示 .dropdown-content */
+.language-dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .language-dropdown .dropdown-content a {
@@ -131,10 +136,6 @@ a:hover {
 .language-dropdown .dropdown-content a:hover {
     background-color: #4fd1c5;
     color: #1a202c;
-}
-
-.language-dropdown:hover .dropdown-content {
-    display: block;
 }
 
 
