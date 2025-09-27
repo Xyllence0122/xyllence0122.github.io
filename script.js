@@ -46,7 +46,7 @@ const translations = {
 
 // 設置或獲取當前語言
 let currentLang = localStorage.getItem('lang') || 'zh-TW';
-// 設置或獲取當前主題模式
+// 設置或獲取當前主題模式，預設為深色模式
 let isLightMode = localStorage.getItem('lightMode') === 'true';
 
 // 翻譯函數
@@ -66,14 +66,18 @@ function setLanguage(lang) {
 function setTheme(isLight) {
     const body = document.body;
     const themeToggleBtn = document.getElementById('themeToggle');
+    const icon = themeToggleBtn.querySelector('i');
+
     if (isLight) {
         body.classList.add('light-mode');
-        themeToggleBtn.querySelector('i').classList.remove('fa-moon');
-        themeToggleBtn.querySelector('i').classList.add('fa-sun');
+        // 在淺色模式下顯示月亮圖標，表示點擊可以切換到深色模式
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
     } else {
         body.classList.remove('light-mode');
-        themeToggleBtn.querySelector('i').classList.remove('fa-sun');
-        themeToggleBtn.querySelector('i').classList.add('fa-moon');
+        // 在深色模式下顯示太陽圖標，表示點擊可以切換到淺色模式
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
     }
     isLightMode = isLight;
     localStorage.setItem('lightMode', isLight);
@@ -83,6 +87,7 @@ function setTheme(isLight) {
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化語言和主題
     setLanguage(currentLang);
+    // 注意這裡調用 setTheme 時，isLightMode 的值應為從 localStorage 讀取到的狀態
     setTheme(isLightMode);
 
     // Email 按鈕功能
@@ -116,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('themeToggle');
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
+            // 切換模式時，將當前模式的反向值傳入 setTheme
             setTheme(!isLightMode);
         });
     }
