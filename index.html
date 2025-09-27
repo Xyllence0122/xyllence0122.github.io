@@ -6,59 +6,91 @@
     <title>陳兆臨 - 個人介紹</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- 引入外部 CSS 檔案 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="navbar">
+    <div class="navbar">
         <nav>
-            <a href="#about">關於我</a>
-            <a href="#projects">專案</a>
-            <a href="#contact">聯絡</a>
+            <a href="#about" data-lang-key="navAbout">關於我</a>
+            <a href="#projects" data-lang-key="navProjects">專案</a>
+            <a href="#contact" data-lang-key="navContact">聯絡我</a>
+            <div class="navbar-right">
+                <!-- 淺色/深色模式切換 -->
+                <button id="themeToggle" class="icon-button">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <!-- 語言選擇 -->
+                <div class="language-dropdown">
+                    <button class="icon-button"><i class="fas fa-globe"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" class="lang-option" data-lang="zh-TW">繁體中文</a>
+                        <a href="#" class="lang-option" data-lang="en">English</a>
+                    </div>
+                </div>
+            </div>
         </nav>
-    </header>
+    </div>
 
-    <section id="hero" class="hero-section">
-        <h1>陳兆臨</h1>
-        <h2>國立臺北科技大學 智慧自動化工程科</h2>
+    <section class="hero-section">
+        <h1 data-lang-key="heroTitle">陳兆臨</h1>
+        <h2 data-lang-key="heroSubtitle">一位熱愛學習與挑戰的工程師</h2>
     </section>
 
     <section id="about" class="about-section content-card">
-        <h2>關於我</h2>
-        <p>
-            嗨，我是陳兆臨，目前就讀於國立臺北科技大學五專智慧自動化工程科，現在是專二學生。我喜歡挑戰不同領域的學習，從前端開發到資訊安全，甚至 3D 建模與語言學習，都是我探索的方向。透過不斷實作與嘗試，我希望能結合程式設計、創意與工程思維，打造兼具功能與美感的作品，並持續拓展自己的可能性。
+        <h2 data-lang-key="aboutTitle">關於我</h2>
+        <p data-lang-key="aboutContent">
+            哈囉！我是陳兆臨，目前就讀於國立臺北科技大學智慧自動化工程系五年一貫學程二年級。
+            我喜歡在不同領域中挑戰自己學習，從前端開發到資訊安全，甚至是3D建模與語言學習都是我探索的範圍。
+            透過不斷的練習與嘗試，我希望能將程式設計、創意與工程思維結合，創造出兼具功能性與美學的作品，並持續拓展自己的可能性。
         </p>
     </section>
 
     <section id="projects" class="projects-section">
-        <h2>專案</h2>
+        <h2 data-lang-key="projectsTitle">專案</h2>
         <div class="project-grid">
-            <div class="project-card content-card">
-                <h3>專案一：響應式網站設計</h3>
-                <p>這是一個使用 HTML5 和 CSS3 建立的響應式網站，展示了在不同裝置上的良好適應性。</p>
+            <div class="content-card project-card">
+                <h3 data-lang-key="project1Title">個人網站建置</h3>
+                <p data-lang-key="project1Content">
+                    這個網站就是我的第一個主要專案，透過 HTML, CSS 和 JavaScript 從零開始建置，
+                    學習了網頁基本結構、樣式設計與互動功能。
+                </p>
             </div>
-            <div class="project-card content-card">
-                <h3>專案二：待辦事項應用</h3>
-                <p>一個基於 JavaScript 的簡單待辦事項應用，提供增加、刪除、編輯任務的功能。</p>
+            <div class="content-card project-card">
+                <h3 data-lang-key="project2Title">3D建模與列印</h3>
+                <p data-lang-key="project2Content">
+                    利用 Fusion 360 進行多項零件設計與組裝，並結合 3D 列印技術將設計實體化，
+                    從中學習了產品設計流程與機械結構。
+                </p>
+            </div>
+            <div class="content-card project-card">
+                <h3 data-lang-key="project3Title">基礎資訊安全實踐</h3>
+                <p data-lang-key="project3Content">
+                    參與資訊安全社團並學習基本資安概念，包含弱點掃描、滲透測試基礎等，
+                    提升了對網路安全的認識與實作能力。
+                </p>
             </div>
         </div>
     </section>
 
     <section id="contact" class="contact-section content-card">
-        <h2>聯絡方式</h2>
-        <!-- 使用一個按鈕並賦予 ID，透過 JavaScript 處理點擊事件 -->
-        <button id="sendEmailBtn" class="btn-email">發送 Email</button>
+        <h2 data-lang-key="contactTitle">聯絡我</h2>
+        <p data-lang-key="contactDescription">
+            歡迎透過 Email 與我聯繫！
+        </p>
+        <button id="sendEmailBtn" class="btn-email" data-lang-key="contactBtn">寄送 Email</button>
     </section>
 
     <footer class="footer">
         <div class="social-links">
-            <a href="https://github.com/Xyllence0122" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://discordapp.com/users/1065557046109421629" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="https://github.com/mmmax-tw" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <!-- 您可以添加更多社群連結 -->
         </div>
-        <p>&copy; 2025 Max</p>
+        <p data-lang-key="footerText">&copy; 2023 陳兆臨. All rights reserved.</p>
     </footer>
 
-    <!-- 引入外部 JavaScript 檔案，放在 </body> 結束標籤之前是最佳實踐 -->
     <script src="script.js"></script>
 </body>
 </html>
