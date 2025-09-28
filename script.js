@@ -2,46 +2,21 @@
 const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
 
-// 初始語言設定 (將這部分提到主題切換之前，確保主題在語言載入前正確設定)
-const savedLang = localStorage.getItem("lang") || "zh-TW";
-updateLanguage(savedLang); // 確保在其他元素被翻譯之前，footer 年份可以更新
-
-// 修正：初始主題設定
+// 初始主題設定
 function setInitialTheme() {
     if (localStorage.getItem("theme") === "dark") {
         body.classList.add("dark-mode");
-        body.classList.remove("light-mode"); // 確保移除潛在的 light-mode
+        body.classList.remove("light-mode");
         themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
     } else {
-        // 預設為淺色模式，或從 localStorage 讀取 'light'
-        body.classList.add("light-mode"); // 預設新增 light-mode
-        body.classList.remove("dark-mode"); // 確保移除潛在的 dark-mode
+        body.classList.add("light-mode");
+        body.classList.remove("dark-mode");
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         localStorage.setItem("theme", "light"); // 確保預設值也寫入 localStorage
     }
 }
 
-setInitialTheme(); // 載入時設定初始主題
-
-themeToggle.addEventListener("click", () => {
-    if (body.classList.contains("light-mode")) {
-        body.classList.replace("light-mode", "dark-mode");
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.setItem("theme", "dark");
-    } else {
-        body.classList.replace("dark-mode", "light-mode");
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem("theme", "light");
-    }
-});
-
-// ... (Translations and other parts of your script)
-
-// Footer 年份 (修正為使用 updateLanguage 中的邏輯，或直接在這裡處理)
-// 因為 footerText 是透過 updateLanguage 處理的，所以這個單獨的設定需要移除
-// document.getElementById("footerYear").innerHTML = `© ${new Date().getFullYear()} 陳兆臨. All rights reserved.`;
-
-// 語言切換
+// 語言切換翻譯內容
 const translations = {
     "zh-TW": {
         navAbout: "關於我",
@@ -61,7 +36,7 @@ const translations = {
         contactTitle: "聯絡我",
         contactDescription: "歡迎透過 Email 與我聯繫！",
         contactBtn: "寄送 Email",
-        footerText: "© YEAR 陳兆臨. All rights reserved."
+        footerText: "&copy; YEAR 陳兆臨. All rights reserved."
     },
     "en": {
         navAbout: "About",
@@ -81,19 +56,39 @@ const translations = {
         contactTitle: "Contact",
         contactDescription: "Feel free to reach me via Email!",
         contactBtn: "Send Email",
-        footerText: "© YEAR Chen Chao-Lin. All rights reserved."
+        footerText: "&copy; YEAR Chen Chao-Lin. All rights reserved."
     }
 };
 
+// 更新語言功能
 function updateLanguage(lang) {
     document.querySelectorAll("[data-lang-key]").forEach(el => {
         const key = el.getAttribute("data-lang-key");
-        if (translations[lang][key]) {
+        if (translations[lang] && translations[lang][key]) {
             el.innerHTML = translations[lang][key].replace("YEAR", new Date().getFullYear());
         }
     });
 }
 
+// 載入時設定初始主題和語言
+setInitialTheme();
+const savedLang = localStorage.getItem("lang") || "zh-TW";
+updateLanguage(savedLang);
+
+// 主題切換事件監聽
+themeToggle.addEventListener("click", () => {
+    if (body.classList.contains("light-mode")) {
+        body.classList.replace("light-mode", "dark-mode");
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem("theme", "dark");
+    } else {
+        body.classList.replace("dark-mode", "light-mode");
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem("theme", "light");
+    }
+});
+
+// 語言選項點擊事件監聽
 document.querySelectorAll(".lang-option").forEach(option => {
     option.addEventListener("click", (e) => {
         e.preventDefault();
@@ -103,15 +98,8 @@ document.querySelectorAll(".lang-option").forEach(option => {
     });
 });
 
-// 初始語言設定
-const savedLang = localStorage.getItem("lang") || "zh-TW";
-updateLanguage(savedLang);
-
 // Email 按鈕
 document.getElementById("sendEmailBtn").addEventListener("click", () => {
+    // *** 請替換成您的實際 Email 地址 ***
     window.location.href = "mailto:your-email@example.com";
 });
-
-// Footer 年份
-document.getElementById("footerYear").innerHTML = 
-    `© ${new Date().getFullYear()} 陳兆臨. All rights reserved.`;
