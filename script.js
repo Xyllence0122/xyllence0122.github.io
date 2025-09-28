@@ -9,6 +9,7 @@ function setInitialTheme() {
         body.classList.remove("light-mode");
         themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
     } else {
+        // 預設為淺色模式，或從 localStorage 讀取 'light'
         body.classList.add("light-mode");
         body.classList.remove("dark-mode");
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
@@ -70,7 +71,7 @@ function updateLanguage(lang) {
     });
 }
 
-// 載入時設定初始主題和語言
+// 頁面載入時：先設定主題，再設定語言
 setInitialTheme();
 const savedLang = localStorage.getItem("lang") || "zh-TW";
 updateLanguage(savedLang);
@@ -100,6 +101,6 @@ document.querySelectorAll(".lang-option").forEach(option => {
 
 // Email 按鈕
 document.getElementById("sendEmailBtn").addEventListener("click", () => {
-    // *** 請替換成您的實際 Email 地址 ***
+    // *** 請務必將此處替換為您的實際 Email 地址 ***
     window.location.href = "mailto:your-email@example.com";
 });
