@@ -22,7 +22,8 @@ let currentLang = localStorage.getItem('lang') || 'zh-TW';
 
 // 讀 JSON 並替換所有有 data-lang-key 的元素
 function loadTranslations(lang) {
-    fetch(`locales/${lang}.json`)
+    // ✅ 修正 GitHub Pages 的 JSON 路徑
+    fetch(`/Max98122/locales/${lang}.json`)
         .then(res => res.json())
         .then(translations => {
             // 更新 <title>
@@ -60,6 +61,7 @@ function setLanguage(lang) {
 
 // 頁面載入時
 window.addEventListener('DOMContentLoaded', () => {
+    setInitialTheme();
     loadTranslations(currentLang);
 
     // 綁定語言切換按鈕
