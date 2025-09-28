@@ -1,4 +1,4 @@
-# Max98122 Personal Website
+## Max Personal Website
 
 Hi! Welcome to my personal website. 🌟  
 
