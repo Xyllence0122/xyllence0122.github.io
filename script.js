@@ -18,43 +18,72 @@ function setInitialTheme() {
 }
 
 // 預設語言
-let currentLang = 'zh-TW';
+let currentLang = localStorage.getItem('lang') || 'zh-TW';
 
 // 讀 JSON 並替換所有有 data-lang-key 的元素
 function loadTranslations(lang) {
-  fetch(`locales/${lang}.json`)
-    .then(res => res.json())
-    .then(translations => {
-      document.querySelectorAll('[data-lang-key]').forEach(el => {
-        const key = el.getAttribute('data-lang-key');
-        if (translations[key]) {
-          el.innerText = translations[key];
-        }
-      });
-    })
-    .catch(err => console.error('載入翻譯失敗:', err));
+    fetch(`locales/${lang}.json`)
+        .then(res => res.json())
+        .then(translations => {
+            // 更新 <title>
+            if (translations['pageTitle']) {
+                document.title = translations['pageTitle'];
+            }
+
+            // 更新語言下拉選單文字
+            if (translations['langZh']) {
+                const zhBtn = document.querySelector('.lang-option[data-lang="zh-TW"]');
+                if (zhBtn) zhBtn.innerText = translations['langZh'];
+            }
+            if (translations['langEn']) {
+                const enBtn = document.querySelector('.lang-option[data-lang="en"]');
+                if (enBtn) enBtn.innerText = translations['langEn'];
+            }
+
+            // 更新頁面中其他元素
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[key]) {
+                    el.innerText = translations[key];
+                }
+            });
+        })
+        .catch(err => console.error('載入翻譯失敗:', err));
 }
 
 // 切換語言
 function setLanguage(lang) {
-  currentLang = lang;
-  loadTranslations(lang);
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    loadTranslations(lang);
 }
 
-// 頁面載入時先載入預設語言
+// 頁面載入時
 window.addEventListener('DOMContentLoaded', () => {
-  loadTranslations(currentLang);
+    loadTranslations(currentLang);
 
-  // 綁定語言切換按鈕
-  document.querySelectorAll('.lang-option').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      const lang = btn.getAttribute('data-lang');
-      setLanguage(lang);
+    // 綁定語言切換按鈕
+    document.querySelectorAll('.lang-option').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            const lang = btn.getAttribute('data-lang');
+            setLanguage(lang);
+        });
     });
-  });
 });
 
+// 主題切換事件監聽
+themeToggle.addEventListener("click", () => {
+    if (body.classList.contains("light-mode")) {
+        body.classList.replace("light-mode", "dark-mode");
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem("theme", "dark");
+    } else {
+        body.classList.replace("dark-mode", "light-mode");
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem("theme", "light");
+    }
+});
 
 // Email 按鈕
 document.getElementById("sendEmailBtn").addEventListener("click", () => {
