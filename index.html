@@ -11,19 +11,18 @@
     <!-- 引入外部 CSS 檔案 -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="light-mode">
     <div class="navbar">
         <nav>
             <a href="#about" data-lang-key="navAbout">關於我</a>
             <a href="#projects" data-lang-key="navProjects">專案</a>
             <a href="#contact" data-lang-key="navContact">聯絡我</a>
             <div class="navbar-right">
-                <!-- 淺色/深色模式切換 -->
-                <!-- 初始圖標由 JS 決定，這裡先給一個預設，JS 會根據 localStorage 覆寫 -->
+                <!-- 主題切換 -->
                 <button id="themeToggle" class="icon-button">
-                    <i class="fas fa-sun"></i> <!-- 假設初始為深色模式，點擊切換到淺色模式 -->
+                    <i class="fas fa-sun"></i>
                 </button>
-                <!-- 語言選擇 -->
+                <!-- 語言切換 -->
                 <div class="language-dropdown">
                     <button class="icon-button"><i class="fas fa-globe"></i></button>
                     <div class="dropdown-content">
@@ -40,14 +39,12 @@
         <h2 data-lang-key="heroSubtitle">一位熱愛學習與挑戰的工程師</h2>
     </section>
 
-    <!-- 關於我區塊 - 移除 content-card class，讓 H2 在外面 -->
     <section id="about" class="about-section">
         <h2 data-lang-key="aboutTitle">關於我</h2>
-        <div class="content-card"> <!-- 內文放在 card 裡 -->
+        <div class="content-card">
             <div class="about-content-grid">
                 <div class="profile-image-container">
-                    <!-- 請將 'https://via.placeholder.com/300' 替換為你的圖片路徑，並確保圖片存在 -->
-                    <img src="https://lens.usercontent.google.com/image?vsrid=CO2YoYL4y-rA7AEQAhgBIiRkNGIwZDVjNi04OTRhLTQxMWMtOTliZi05ZjAxNWQ5ZjU1ZjkyBiICc2QoSzi2ks79qvmPAw&gsessionid=vc9CqVqHpGXSu7PK4cNE08wY_N1lGgDc3UqgeFkeP_RzAUkaJWd1LQ" alt="陳兆臨個人頭像" class="profile-image">
+                    <img src="images/profile.jpg" alt="陳兆臨個人頭像" class="profile-image">
                 </div>
                 <div class="about-text-content">
                     <p data-lang-key="aboutContent">
@@ -89,19 +86,16 @@
 
     <section id="contact" class="contact-section content-card">
         <h2 data-lang-key="contactTitle">聯絡我</h2>
-        <p data-lang-key="contactDescription">
-            歡迎透過 Email 與我聯繫！
-        </p>
+        <p data-lang-key="contactDescription">歡迎透過 Email 與我聯繫！</p>
         <button id="sendEmailBtn" class="btn-email" data-lang-key="contactBtn">寄送 Email</button>
     </section>
 
     <footer class="footer">
         <div class="social-links">
             <a href="https://github.com/Xyllence0122" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <!-- 新增 Discord 連結 -->
             <a href="https://discordapp.com/users/1065557046109421629" target="_blank"><i class="fab fa-discord"></i> Discord</a>
         </div>
-        <p data-lang-key="footerText">&copy; 2025 陳兆臨. All rights reserved.</p>
+        <p id="footerYear">&copy; 2025 陳兆臨. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
