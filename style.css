@@ -1,44 +1,302 @@
+/* style.css */
 /* 通用樣式 */
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0; padding: 0;
-  background-color: #1a202c; color: #f7fafc;
-  line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
+html {
+    scroll-behavior: smooth; /* 頁內跳轉平滑滾動 */
 }
-body.light-mode { background-color: #f7fafc; color: #1a202c; }
 
-h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: #4fd1c5; text-align: center; }
-a { color: #4fd1c5; text-decoration: none; transition: color 0.3s ease; }
-a:hover { color: #81e6d9; }
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c; /* 深色背景 */
+    color: #f7fafc; /* 淺色文字 */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease; /* 新增過渡效果 */
+
+    /* 深色模式背景圖案 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 304 304' width='304' height='304'%3E%3Cpath fill='%23f7fafc' fill-opacity='0.05' d='M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 216.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 304px 304px; /* 控制圖案大小 */
+    background-repeat: repeat; /* 重複圖案 */
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #4fd1c5; /* 強調色 */
+    text-align: center;
+}
+
+a {
+    color: #4fd1c5; /* 強調色 */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #81e6d9; /* 強調色淺一點 */
+}
 
 .content-card {
-  background-color: #2d3748; border-radius: 8px; padding: 2rem;
-  margin: 2rem auto; max-width: 800px;
-  transition: background-color 0.3s ease;
+    background-color: #2d3748; /* 卡片背景色 */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 新增過渡效果 */
 }
-body.light-mode .content-card { background-color: #e2e8f0; }
 
-/* Navbar */
-.navbar { background-color: #2d3748; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; }
-.navbar nav { display: flex; justify-content: center; align-items: center; gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-.navbar a { color: #f7fafc; font-weight: 700; padding: 0.5rem 1rem; border-radius: 4px; transition: background-color 0.3s ease; }
-.navbar a:hover { background-color: #4fd1c5; color: #1a202c; }
-.navbar-right { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
-.icon-button { background: none; border: none; color: #f7fafc; cursor: pointer; padding: 0.5rem; border-radius: 4px; }
-.icon-button:hover { color: #4fd1c5; background-color: rgba(255,255,255,0.1); }
+/* 導覽列 (Navbar) */
+.navbar {
+    background-color: #2d3748;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease; /* 新增過渡效果 */
+}
 
-/* 語言下拉 */
-.language-dropdown { position: relative; display: inline-block; }
+.navbar nav {
+    display: flex;
+    justify-content: center; /* 讓連結居中 */
+    align-items: center; /* 垂直居中 */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem; /* 增加左右 padding */
+}
+
+.navbar a {
+    color: #f7fafc;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #4fd1c5;
+    color: #1a202c;
+}
+
+.navbar-right {
+    margin-left: auto; /* 將右側元素推到最右邊 */
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* 圖標間距 */
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: #f7fafc;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.icon-button:hover {
+    color: #4fd1c5;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 語言選擇下拉菜單 */
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
 .language-dropdown .dropdown-content {
-  display: none; position: absolute; background-color: #2d3748;
-  min-width: 120px; right: 0; border-radius: 4px; margin-top: 8px; z-index: 10;
+    display: none; /* 預設隱藏 */
+    position: absolute;
+    background-color: #2d3748;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0; /* 讓下拉菜單靠右對齊按鈕 */
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px; /* 與按鈕的間距 */
 }
-.language-dropdown:hover .dropdown-content { display: block; }
-.language-dropdown .dropdown-content a { color: #f7fafc; padding: 10px 16px; display: block; text-align: left; }
-.language-dropdown .dropdown-content a:hover { background-color: #4fd1c5; color: #1a202c; }
 
-/* Hero */
-.hero-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-  background-image: linear-gradient(rgba(26,32,44,0.8), rgba(26,32,44,0.8)), url('https
+/* 鼠標懸停在 .language-dropdown 上時顯示 .dropdown-content */
+.language-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.language-dropdown .dropdown-content a {
+    color: #f7fafc;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-weight: normal;
+}
+
+.language-dropdown .dropdown-content a:hover {
+    background-color: #4fd1c5;
+    color: #1a202c;
+}
+
+/* 英雄區塊 (Hero Section) */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* 背景圖片隨機生成，每次載入可能不同 */
+    /* 新增一個更通用的隨機背景，淺色模式也會有不同的關鍵字 */
+    background-image: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('https://source.unsplash.com/random/1600x900/?coding,abstract,technology,dark');
+    background-size: cover;
+    background-position: center;
+    color: #f7fafc;
+    padding: 0 1rem;
+    transition: background-image 0.5s ease; /* 新增過渡效果 */
+}
+
+.hero-section h1 {
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    color: #4fd1c5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #cbd5e0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 關於我 (About Me) */
+.about-section {
+    text-align: center;
+    /* 修正錨點被導覽列遮住問題 */
+    scroll-margin-top: 80px; /* 依照 navbar 高度調整 */
+}
+
+.about-section h2 {
+    /* 讓 H2 出現在 content-card 外面，且保持置中 */
+    margin-bottom: 1.5rem; /* 增加 H2 與 content-card 的間距 */
+}
+
+.about-content-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* 左邊固定 200px 給圖片，右邊剩餘空間給文字 */
+    gap: 2rem; /* 圖片和文字之間的間距 */
+    align-items: center; /* 垂直居中對齊圖片和文字 */
+    max-width: 700px; /* 限制內容最大寬度 */
+    margin: 0 auto; /* 居中 grid 容器 */
+    text-align: left; /* 讓內文左對齊 */
+}
+
+.profile-image-container {
+    width: 200px; /* 圓形圖片的寬度，變大一些 */
+    height: 200px; /* 圓形圖片的高度，變大一些 */
+    border-radius: 50%; /* 圓形顯示 */
+    overflow: hidden; /* 隱藏超出邊界的圖片部分 */
+    border: 4px solid #4fd1c5; /* 圖片邊框 */
+    box-shadow: 0 0 0 6px rgba(79, 209, 197, 0.2); /* 圖片外圍光暈效果 */
+    flex-shrink: 0; /* 防止圖片縮小 */
+    transition: transform 0.3s ease, border-color 0.3s ease; /* 在網格佈局中，圖片會自動對齊，不需要 margin: auto */
+}
+
+.profile-image-container:hover {
+    transform: scale(1.05);
+    border-color: #81e6d9;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 圖片填滿容器，可能裁剪 */
+    display: block;
+}
+
+.about-text-content p {
+    margin: 0; /* 移除段落預設 margin */
+}
+
+/* 專案 (Projects) */
+.projects-section {
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* 修正錨點被導覽列遮住問題 */
+    scroll-margin-top: 80px; /* 依照 navbar 高度調整 */
+}
+
+.projects-section h2 {
+    margin-bottom: 2rem;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-card h3 {
+    margin-top: 0;
+    color: #f7fafc;
+    font-size: 1.8rem;
+}
+
+.project-card p {
+    color: #cbd5e0;
+    flex-grow: 1; /* 讓段落佔滿剩餘空間 */
+}
+
+/* 聯絡方式 (Contact) */
+.contact-section {
+    text-align: center;
+    /* 修正錨點被導覽列遮住問題 */
+    scroll-margin-top: 80px; /* 依照 navbar 高度調整 */
+}
+
+.contact-section h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* Email 按鈕樣式 (適用於 <button> 和 <a>) */
+.btn-email {
+    display: inline-block;
+    background-color: #4fd1c5;
+    color: #1a202c;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 1rem;
+    border: none; /* 移除按鈕預設邊框 */
+    cursor: pointer; /* 顯示手型游標 */
+    font-size: 1rem;
+}
+
+.btn-email:hover {
+    background-color: #81e6d9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 頁尾 (Footer) */
+.footer {
+    background-color: #2d3748;
+    color: #cbd5e0;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    border-top: 1
