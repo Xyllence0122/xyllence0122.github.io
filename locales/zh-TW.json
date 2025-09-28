@@ -1,4 +1,20 @@
 {
-  "title": "歡迎來到我的網站",
-  "description": "這是中文描述文字"
+  "navAbout": "關於我",
+  "navProjects": "專案",
+  "navContact": "聯絡我",
+  "heroTitle": "陳兆臨",
+  "heroSubtitle": "熱愛程式開發與智慧自動化樂於挑戰與實作",
+  "aboutTitle": "關於我",
+  "aboutContent": "哈囉！我是陳兆臨，目前就讀於國立臺北科技大學五專智慧自動化工程科，現在是專二學生。我喜歡挑戰不同領域的學習，從前端開發到資訊安全，甚至 3D 建模與語言學習，都是我探索的方向。透過不斷實作與嘗試，我希望能結合程式設計、創意與工程思維，打造兼具功能與美感的作品，並持續拓展自己的可能性。",
+  "projectsTitle": "專案",
+  "project1Title": "個人網站建置",
+  "project1Content": "這個網站就是我的第一個主要專案，透過 HTML, CSS 和 JavaScript 從零開始建置，學習了網頁基本結構、樣式設計與互動功能。",
+  "project2Title": "3D建模與工程設計",
+  "project2Content": "我熟悉 SolidWorks，並已取得 CSWA 與 CSWP 證照，能夠進行精確的零件設計與組裝。透過 3D 建模的實作，累積了對產品設計流程與機械結構的完整經驗。",
+  "project3Title": "基礎資訊安全學習",
+  "project3Content": "目前正持續學習資安相關知識，包含基礎網路安全概念、弱點掃描與滲透測試原理等。雖然仍在進修階段，但透過課程與自學逐步累積對資訊安全的理解，未來希望能在實務專案中應用所學。",
+  "contactTitle": "聯絡我",
+  "contactDescription": "歡迎透過 Email 與我聯繫！",
+  "contactBtn": "寄送 Email",
+  "footerText": "© 2025 陳兆臨. All rights reserved."
 }
