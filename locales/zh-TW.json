@@ -1,4 +1,5 @@
 {
+  "pageTitle": "陳兆臨 - 個人介紹",
   "navAbout": "關於我",
   "navProjects": "專案",
   "navContact": "聯絡我",
@@ -16,5 +17,7 @@
   "contactTitle": "聯絡我",
   "contactDescription": "歡迎透過 Email 與我聯繫！",
   "contactBtn": "寄送 Email",
-  "footerText": "© 2025 陳兆臨. All rights reserved."
+  "footerText": "© 2025 陳兆臨. All rights reserved.",
+  "langZh": "繁體中文",
+  "langEn": "English"
 }
