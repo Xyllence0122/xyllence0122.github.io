@@ -2,11 +2,26 @@
 const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
 
-if (localStorage.getItem("theme") === "dark") {
-    body.classList.remove("light-mode");
-    body.classList.add("dark-mode");
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+// 初始語言設定 (將這部分提到主題切換之前，確保主題在語言載入前正確設定)
+const savedLang = localStorage.getItem("lang") || "zh-TW";
+updateLanguage(savedLang); // 確保在其他元素被翻譯之前，footer 年份可以更新
+
+// 修正：初始主題設定
+function setInitialTheme() {
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+        body.classList.remove("light-mode"); // 確保移除潛在的 light-mode
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+        // 預設為淺色模式，或從 localStorage 讀取 'light'
+        body.classList.add("light-mode"); // 預設新增 light-mode
+        body.classList.remove("dark-mode"); // 確保移除潛在的 dark-mode
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem("theme", "light"); // 確保預設值也寫入 localStorage
+    }
 }
+
+setInitialTheme(); // 載入時設定初始主題
 
 themeToggle.addEventListener("click", () => {
     if (body.classList.contains("light-mode")) {
@@ -19,6 +34,12 @@ themeToggle.addEventListener("click", () => {
         localStorage.setItem("theme", "light");
     }
 });
+
+// ... (Translations and other parts of your script)
+
+// Footer 年份 (修正為使用 updateLanguage 中的邏輯，或直接在這裡處理)
+// 因為 footerText 是透過 updateLanguage 處理的，所以這個單獨的設定需要移除
+// document.getElementById("footerYear").innerHTML = `© ${new Date().getFullYear()} 陳兆臨. All rights reserved.`;
 
 // 語言切換
 const translations = {
