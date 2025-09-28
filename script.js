@@ -7,12 +7,12 @@ function setInitialTheme() {
     if (localStorage.getItem("theme") === "dark") {
         body.classList.add("dark-mode");
         body.classList.remove("light-mode");
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     } else {
         // 預設為淺色模式，或從 localStorage 讀取 'light'
         body.classList.add("light-mode");
         body.classList.remove("dark-mode");
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         localStorage.setItem("theme", "light"); // 確保預設值也寫入 localStorage
     }
 }
