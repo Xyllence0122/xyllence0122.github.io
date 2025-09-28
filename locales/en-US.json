@@ -1,4 +1,20 @@
 {
-  "title": "Welcome to my website",
-  "description": "This is the description in English"
+  "navAbout": "About",
+  "navProjects": "Projects",
+  "navContact": "Contact",
+  "heroTitle": "Max Chen",
+  "heroSubtitle": "Passionate about programming and Intelligent Automation, loves challenges and hands-on projects",
+  "aboutTitle": "About Me",
+  "aboutContent": "Hello! I'm Chao Lin Chen, currently studying Intelligent Automation Engineering at National Taipei University of Technology. I enjoy exploring different fields, from front-end development to cybersecurity and 3D modeling. Through continuous practice, I aim to combine programming, creativity, and engineering thinking to create functional and aesthetic works while expanding my potential.",
+  "projectsTitle": "Projects",
+  "project1Title": "Personal Website",
+  "project1Content": "This website is my first major project, built from scratch using HTML, CSS, and JavaScript, learning basic structure, styling, and interactive features.",
+  "project2Title": "3D Modeling & Engineering Design",
+  "project2Content": "I'm proficient with SolidWorks and hold CSWA and CSWP certifications, capable of precise part design and assembly. Through 3D modeling practice, I gained a complete understanding of product design workflow and mechanical structures.",
+  "project3Title": "Basic Cybersecurity Learning",
+  "project3Content": "Currently studying cybersecurity fundamentals, including network security concepts, vulnerability scanning, and penetration testing principles. While still learning, I am gradually building practical understanding for future projects.",
+  "contactTitle": "Contact Me",
+  "contactDescription": "Feel free to reach out via Email!",
+  "contactBtn": "Send Email",
+  "footerText": "© 2025 Max Chen. All rights reserved."
 }
