@@ -42,21 +42,16 @@ a:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2.5rem;
     margin: 2rem auto;
-    max-width: 1000px; /* <--- 統一最大寬度 */
+    max-width: 1000px; /* <--- 統一所有 content-card 的最大寬度 */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 文字發亮效果 */
-.content-card p,
-.content-card h3 {
-    transition: text-shadow 0.3s ease, color 0.3s ease; /* 為文字陰影和顏色添加過渡 */
+/* START: 區塊發亮效果 */
+.content-card:hover {
+    box-shadow: 0 0 15px rgba(79, 209, 197, 0.6), 0 4px 6px rgba(0, 0, 0, 0.1); /* 增加一個發光的陰影 */
+    transform: translateY(-5px); /* 輕微上浮效果 */
 }
-
-.content-card:hover p,
-.content-card:hover h3 {
-    text-shadow: 0 0 8px rgba(79, 209, 197, 0.7); /* 發光效果 */
-    color: #81e6d9; /* 稍微改變顏色以增強效果 */
-}
+/* END: 區塊發亮效果 */
 
 
 /* 導覽列 (Navbar) */
@@ -198,17 +193,10 @@ a:hover {
     grid-template-columns: 200px 1fr;
     gap: 2rem;
     align-items: center;
-    max-width: 700px; /* 這個網格內容內部寬度保持不變 */
+    max-width: 700px;
     margin: 0 auto;
     text-align: left;
 }
 
 .profile-image-container {
     width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid #4fd1c5;
-    box-shadow: 0 0 0 6px rgba(79, 209, 197, 0.2);
-    flex-shrink: 0;
-    
