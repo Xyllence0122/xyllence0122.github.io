@@ -193,10 +193,139 @@ a:hover {
     grid-template-columns: 200px 1fr;
     gap: 2rem;
     align-items: center;
-    max-width: 700px;
+    max-width: 700px; /* 這個 max-width 保持不變，只影響頭像和文字的佈局 */
     margin: 0 auto;
     text-align: left;
 }
 
 .profile-image-container {
     width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #4fd1c5;
+    box-shadow: 0 0 0 6px rgba(79, 209, 197, 0.2);
+    flex-shrink: 0;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-image-container:hover {
+    transform: scale(1.05);
+    border-color: #81e6d9;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;  /* 保持比例裁切 */
+}
+
+.about-text-content p {
+    margin: 0;
+}
+
+/* 專案 (Projects) */
+.projects-section {
+    padding: 2rem 1rem;
+    max-width: 1000px; /* 與 content-card 統一 */
+    margin: 0 auto;
+    scroll-margin-top: 80px;
+}
+
+.projects-section h2 {
+    margin-bottom: 2rem;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 確保三格橫向排列 */
+    gap: 2rem;
+    align-items: stretch; /* 讓卡片高度一致 */
+}
+
+.project-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-card h3 {
+    margin-top: 0;
+    color: #f7fafc;
+    font-size: 1.8rem;
+}
+
+.project-card p {
+    color: #cbd5e0;
+    flex-grow: 1;
+}
+
+/* 聯絡方式 (Contact) */
+.contact-section {
+    text-align: center;
+    scroll-margin-top: 80px;
+    max-width: 1000px; /* 與 content-card 統一 */
+    margin: 0 auto 3rem auto; /* 調整外邊距使其與專案區塊對齊 */
+}
+
+.contact-section h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* Email 按鈕樣式 */
+.btn-email {
+    display: inline-block;
+    background-color: #4fd1c5;
+    color: #1a202c;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 1rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-email:hover {
+    background-color: #81e6d9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 頁尾 (Footer) */
+.footer {
+    background-color: #2d3748;
+    color: #cbd5e0;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid #4a5568;
+    transition: background-color 0.3s ease, border-top-color 0.3s ease;
+}
+
+.footer .social-links {
+    margin-bottom: 1rem;
+}
+
+.footer .social-links a {
+    color: #f7fafc;
+    margin: 0 1rem;
+    font-weight: 500;
+}
+
+.footer .social-links a:hover {
+    color: #4fd1c5;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* 淺色模式樣式 */
+body.light-mode {
+    background-color: #f7fafc;
+    color: #2d374
