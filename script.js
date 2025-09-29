@@ -90,5 +90,5 @@ themeToggle.addEventListener("click", () => {
 // Email 按鈕
 document.getElementById("sendEmailBtn").addEventListener("click", () => {
     // *** 請務必將此處替換為您的實際 Email 地址 ***
-    window.location.href = "mailto:your-email@example.com";
+    window.location.href = "mmmax.tw@gmail.com";
 });
