@@ -497,3 +497,18 @@ body.light-mode .footer .social-links a:hover {
         font-size: 0.9rem;
     }
 }
+/* 統一主要區塊寬度 */
+.about-section,
+.projects-section,
+.contact-section {
+  max-width: 1000px;  /* 跟上方 About 和下方 Contact 一致 */
+  margin: 0 auto;     /* 置中 */
+  padding: 0 20px;    /* 防止太貼邊 */
+}
+
+/* 調整專案格子排列 */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 三等分 */
+  gap: 20px; /* 卡片間距 */
+}
