@@ -23,7 +23,7 @@ let currentLang = localStorage.getItem('lang') || 'zh-TW';
 // 讀 JSON 並替換所有有 data-lang-key 的元素
 function loadTranslations(lang) {
     // ✅ 修正 GitHub Pages 的 JSON 路徑
-    fetch(`/Max98122/locales/${lang}.json`)
+    fetch(`locales/${lang}.json`)
         .then(res => res.json())
         .then(translations => {
             // 更新 <title>
