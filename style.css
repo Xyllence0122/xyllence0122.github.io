@@ -326,7 +326,7 @@ a:hover {
 }
 
 /* =========================
-   淺色模式配色
+   淺色模式配色（修正版）
    ========================= */
 body.light-mode {
   background-color: #f7fafc; /* 原本深色模式文字色 → 當淺色模式背景 */
@@ -345,6 +345,21 @@ body.light-mode .navbar a {
   color: #1a202c;
 }
 body.light-mode .navbar a:hover {
+  background-color: #4fd1c5;
+  color: #ffffff;
+}
+
+/* 語言 / 深淺色切換按鈕 */
+body.light-mode .language-toggle,
+body.light-mode .theme-toggle,
+body.light-mode .language-dropdown {
+  background-color: #ffffff;
+  color: #1a202c;
+  border: 1px solid #e2e8f0;
+}
+body.light-mode .language-toggle:hover,
+body.light-mode .theme-toggle:hover,
+body.light-mode .language-dropdown a:hover {
   background-color: #4fd1c5;
   color: #ffffff;
 }
@@ -375,13 +390,8 @@ body.light-mode .about img {
   box-shadow: 0 4px 12px rgba(79, 209, 197, 0.3);
 }
 
-/* 下拉選單 */
-body.light-mode .language-dropdown {
-  background-color: #ffffff;
+/* About & Project 文字顏色 */
+body.light-mode .about,
+body.light-mode .project {
   color: #1a202c;
 }
-body.light-mode .language-dropdown a:hover {
-  background-color: #e6fffa;
-  color: #1a202c;
-}
-
