@@ -1,5 +1,3 @@
-
-Script · JS
 // ---- Hero 3D node network ----
   const canvas = document.getElementById('hero-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
