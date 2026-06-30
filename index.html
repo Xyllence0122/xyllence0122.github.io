@@ -1,90 +1,891 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-lang-key="pageTitle"></title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- CSS -->
-<link rel="stylesheet" href="style.css">
+<title>Chao Lin Chen — Max</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0d12">
+<style>
+  :root{
+    --bg:#0a0d12;
+    --bg-soft:#0e131a;
+    --line:#1d242c;
+    --text:#e9eef2;
+    --muted:#6f7c89;
+    --accent:#6ef0d8;
+    --accent-2:#8b7bff;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+  html[data-theme="light"]{
+    --bg:#f3f1ec;
+    --bg-soft:#eae7e0;
+    --line:#d8d3c8;
+    --text:#16191c;
+    --muted:#6b6a64;
+    --accent:#0c9a82;
+    --accent-2:#5b46c9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{ scroll-behavior:smooth; background:var(--bg); transition:background .4s ease; }
+  body{
+    color:var(--text);
+    font-family:var(--body);
+    overflow-x:hidden;
+    transition:color .4s ease;
+  }
+  ::selection{background:var(--accent);color:#0a0d12;}
+
+  /* ---- scroll progress ---- */
+  #scroll-progress{
+    position:fixed; top:0; left:0; height:2px; background:var(--accent);
+    z-index:210; width:0%; transition:width .1s linear;
+  }
+
+  /* ---- preloader ---- */
+  #preloader{
+    position:fixed; inset:0; z-index:500; background:var(--bg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition:opacity .6s ease, visibility .6s ease;
+  }
+  #preloader.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+  #preloader .pre-mark{
+    font-family:var(--display); font-weight:700; font-size:22px; letter-spacing:-0.02em; margin-bottom:18px;
+  }
+  #preloader .pre-mark span{ color:var(--accent); }
+  #preloader .pre-counter{
+    font-family:var(--mono); font-size:13px; color:var(--muted); letter-spacing:.1em;
+  }
+  #preloader .pre-counter b{ color:var(--accent); font-weight:500; }
+  #preloader .pre-bar{ width:160px; height:1px; background:var(--line); margin-top:18px; position:relative; overflow:hidden; }
+  #preloader .pre-bar i{
+    position:absolute; left:0; top:0; height:100%; width:0%; background:var(--accent);
+  }
+
+  /* ---- theme toggle (sliding switch) ---- */
+  .theme-switch{
+    display:inline-flex; align-items:center; margin-left:8px; cursor:pointer; user-select:none;
+  }
+  .theme-switch input{ display:none; }
+  .theme-switch .track{
+    width:46px; height:24px; border-radius:999px; border:1px solid var(--line);
+    background:var(--bg-soft); position:relative; transition:border-color .3s, background .3s;
+  }
+  .theme-switch .thumb{
+    position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+    background:var(--accent); transition:transform .35s cubic-bezier(.65,0,.35,1), background .3s;
+    display:flex; align-items:center; justify-content:center; font-size:10px;
+  }
+  .theme-switch input:checked ~ .track .thumb{ transform:translateX(22px); }
+  .theme-switch:hover .track{ border-color:var(--accent); }
+
+  /* ---- nav ---- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 6vw;
+    background:rgba(10,13,18,0.0);
+    backdrop-filter:blur(0px);
+    transition:background .4s ease, backdrop-filter .4s ease;
+  }
+  nav.scrolled{
+    background:var(--bg);
+    background:color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-mark{font-family:var(--mono); font-size:13px; letter-spacing:0.05em;}
+  .nav-links{display:flex; gap:32px; font-family:var(--mono); font-size:12px; letter-spacing:0.05em;}
+  .nav-links a{
+    color:var(--text); text-decoration:none; opacity:.7; transition:opacity .25s;
+    position:relative; padding-bottom:3px;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:100%; height:1px; background:var(--accent);
+    transform:scaleX(0); transform-origin:right; transition:transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  .nav-links a:hover{ opacity:1; }
+  .nav-links a:hover::after{ transform:scaleX(1); transform-origin:left; }
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative; height:100svh; display:flex; flex-direction:column;
+    justify-content:flex-end; padding:0 6vw 8vw; overflow:hidden;
+  }
+  #hero-canvas{position:fixed; inset:0; z-index:-1;}
+  .hero-eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.15em; color:var(--accent);
+    margin-bottom:18px; position:relative; z-index:2; opacity:0;
+    animation:rise .9s .2s forwards cubic-bezier(.16,1,.3,1);
+  }
+  .hero h1{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(48px, 11vw, 150px); line-height:0.92; letter-spacing:-0.02em;
+    position:relative; z-index:2;
+  }
+  .hero h1 span{
+    display:block; overflow:hidden;
+  }
+  .hero h1 span em{
+    font-style:normal; display:inline-block; opacity:0; transform:translateY(110%);
+    animation:rise .9s forwards cubic-bezier(.16,1,.3,1);
+  }
+  .hero h1 span:nth-child(2) em{ animation-delay:.35s; color:var(--accent); }
+  .hero h1 span:nth-child(1) em{ animation-delay:.15s; }
+  @keyframes rise{ to{opacity:1; transform:translateY(0);} }
+
+  .hero-sub{
+    position:relative; z-index:2; max-width:480px; margin-top:28px;
+    font-size:16px; line-height:1.6; color:var(--muted);
+    opacity:0; animation:rise .9s .55s forwards cubic-bezier(.16,1,.3,1);
+  }
+  .scroll-cue{
+    position:absolute; bottom:36px; right:6vw; z-index:2;
+    font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.1em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue .bar{width:1px; height:34px; background:var(--line); position:relative; overflow:hidden;}
+  .scroll-cue .bar::after{
+    content:''; position:absolute; top:-100%; left:0; width:100%; height:100%;
+    background:var(--accent); animation:scrollbar 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollbar{ 50%{top:0;} 100%{top:100%;} }
+
+  /* ---- section shared ---- */
+  section{ position:relative; padding:140px 6vw; border-top:1px solid var(--line); }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.15em; color:var(--accent);
+    display:flex; align-items:center; gap:12px; margin-bottom:48px;
+  }
+  .eyebrow::before{
+    content:''; width:28px; height:1px; background:var(--accent);
+    transform:scaleX(0); transform-origin:left; transition:transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .eyebrow.in::before{ transform:scaleX(1); }
+  .reveal{ opacity:0; transform:translateY(40px); transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---- about ---- */
+  .about-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:80px; }
+  .about-text p{ font-size:clamp(22px,2.6vw,32px); line-height:1.5; font-family:var(--display); font-weight:500; }
+  .about-text p .hl{ color:var(--accent); }
+  .role-card{
+    border:1px solid var(--line); padding:28px; border-radius:2px; align-self:start;
+    font-family:var(--mono); font-size:13px; line-height:2; color:var(--muted);
+  }
+  .role-card strong{ display:block; color:var(--text); font-family:var(--body); font-size:16px; margin-bottom:14px; font-weight:600;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+
+  /* ---- projects ---- */
+  .project{
+    display:grid; grid-template-columns:80px 1fr 1fr auto; gap:32px;
+    padding:48px 0; border-top:1px solid var(--line); align-items:center;
+    cursor:pointer; text-decoration:none; color:inherit;
+  }
+  .project:hover .project-name{ color:var(--accent); }
+  .project:first-of-type{ border-top:none; }
+  .project-index{
+    font-family:var(--mono); color:var(--muted); font-size:13px; transition:color .3s;
+  }
+  .project:hover .project-index{ color:var(--accent); }
+  .project-name{ font-family:var(--display); font-weight:600; font-size:clamp(22px,3vw,34px); transition:color .3s; }
+  .project-desc{ color:var(--muted); font-size:14px; line-height:1.6; }
+  .project-tags{ font-family:var(--mono); font-size:11px; color:var(--accent-2); margin-top:10px; letter-spacing:.04em;}
+  .project-arrow{
+    font-family:var(--display); font-size:26px; color:var(--accent);
+    opacity:0; transform:translateX(-10px) rotate(-45deg); transition:opacity .3s, transform .3s;
+  }
+  .project:hover .project-arrow{ opacity:1; transform:translateX(0) rotate(-45deg); }
+  @media (max-width:800px){ .project{grid-template-columns:1fr; gap:8px;} .project-arrow{ display:none; } }
+
+  /* ---- skills ---- */
+  .skills-wrap{ display:flex; flex-wrap:wrap; gap:14px; }
+  .skill-pill{
+    font-family:var(--mono); font-size:13px; padding:12px 20px; border:1px solid var(--line);
+    border-radius:999px; color:var(--text); transition:transform .3s, border-color .3s, color .3s, box-shadow .3s;
+    position:relative; opacity:0; transform:translateY(16px) scale(.96);
+  }
+  .skill-pill.in{ opacity:1; transform:translateY(0) scale(1); }
+  .skill-pill:hover{
+    border-color:var(--accent); color:var(--accent); transform:translateY(-4px) scale(1.04);
+    box-shadow:0 8px 24px -8px rgba(110,240,216,0.35);
+  }
+
+  /* ---- custom cursor ---- */
+  #cursor-dot, #cursor-ring{
+    position:fixed; top:0; left:0; pointer-events:none; z-index:400;
+    border-radius:50%; transform:translate(-50%,-50%);
+  }
+  #cursor-dot{ width:6px; height:6px; background:var(--accent); }
+  #cursor-ring{
+    width:34px; height:34px; border:1px solid var(--accent); opacity:.5;
+    transition:width .25s, height .25s, opacity .25s, border-color .25s;
+  }
+  #cursor-ring.hovering{ width:56px; height:56px; opacity:.9; border-color:var(--accent-2); }
+  @media (hover:none), (pointer:coarse){ #cursor-dot, #cursor-ring{ display:none; } }
+
+  /* ---- contact ---- */
+  .contact{ text-align:left; }
+  .contact h2{
+    font-family:var(--display); font-weight:700; font-size:clamp(36px,7vw,90px); line-height:1.05; letter-spacing:-0.02em;
+    max-width:900px;
+  }
+  .contact h2 a{ color:var(--accent); text-decoration:none; border-bottom:2px solid transparent; transition:border-color .3s; }
+  .contact h2 a:hover{ border-color:var(--accent); }
+  .contact-grid{
+    margin-top:64px; display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+    font-family:var(--mono); font-size:13px;
+  }
+  .contact-item span{ display:block; color:var(--muted); margin-bottom:8px; font-size:11px; letter-spacing:.1em;}
+  .contact-item a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px; transition:.3s; }
+  .contact-item a:hover{ color:var(--accent); border-color:var(--accent); }
+  @media (max-width:900px){ .contact-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:500px){ .contact-grid{grid-template-columns:1fr;} }
+
+  #project-preview{
+    position:fixed; top:0; left:0; z-index:250; pointer-events:none;
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:#0a0d12;
+    background:var(--accent); padding:9px 16px; border-radius:999px;
+    opacity:0; transform:translate(-50%,-50%) scale(.7); transition:opacity .25s, transform .25s;
+    white-space:nowrap;
+  }
+  #project-preview.show{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+
+  footer{
+    padding:28px 6vw; display:flex; justify-content:space-between;
+    font-family:var(--mono); font-size:11px; color:var(--muted); border-top:1px solid var(--line);
+  }
+
+  /* ---- admin ---- */
+  #admin-trigger{
+    position:fixed; bottom:18px; left:18px; z-index:200;
+    width:10px; height:10px; border-radius:50%; background:var(--line);
+    cursor:pointer; opacity:0.5; transition:.3s;
+  }
+  #admin-trigger:hover{ opacity:1; background:var(--accent); }
+
+  .admin-overlay{
+    position:fixed; inset:0; z-index:300; background:rgba(8,10,13,0.92);
+    backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .admin-overlay.open{ display:flex; }
+  .admin-panel{
+    background:var(--bg-soft); border:1px solid var(--line); width:100%; max-width:640px;
+    max-height:86vh; overflow-y:auto; padding:36px; border-radius:4px;
+  }
+  .admin-panel h3{ font-family:var(--display); font-size:22px; margin-bottom:6px; }
+  .admin-panel .sub{ font-family:var(--mono); font-size:11px; color:var(--muted); margin-bottom:28px; letter-spacing:.04em; line-height:1.6;}
+  .admin-block{ margin-bottom:32px; }
+  .admin-block h4{ font-family:var(--mono); font-size:12px; color:var(--accent); letter-spacing:.1em; margin-bottom:14px; }
+  .admin-row{ display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+  .admin-row input{
+    flex:1; min-width:120px; background:var(--bg); border:1px solid var(--line); color:var(--text);
+    padding:10px 12px; font-family:var(--body); font-size:13px; border-radius:2px; outline:none;
+  }
+  .admin-row input:focus{ border-color:var(--accent); }
+  .admin-btn{
+    background:transparent; border:1px solid var(--accent); color:var(--accent);
+    padding:10px 16px; font-family:var(--mono); font-size:12px; cursor:pointer; border-radius:2px;
+    transition:.25s; white-space:nowrap;
+  }
+  .admin-btn:hover{ background:var(--accent); color:#0a0d12; }
+  .admin-btn.danger{ border-color:#ff6e6e; color:#ff6e6e; }
+  .admin-btn.danger:hover{ background:#ff6e6e; color:#0a0d12; }
+  .admin-list-item{
+    display:flex; justify-content:space-between; align-items:center;
+    border:1px solid var(--line); padding:10px 14px; border-radius:2px; margin-bottom:8px;
+    font-family:var(--mono); font-size:12px;
+  }
+  .admin-list-item span{ color:var(--muted); }
+  .admin-close{
+    position:absolute; top:20px; right:24px; background:none; border:none; color:var(--muted);
+    font-size:22px; cursor:pointer; line-height:1;
+  }
+  .admin-panel{ position:relative; }
+  .admin-pass-gate{ text-align:center; }
+  .admin-pass-gate input{ width:100%; text-align:center; margin-bottom:14px; }
+</style>
 </head>
 <body>
-<div class="navbar">
-  <nav>
-    <a href="#about" data-lang-key="navAbout"></a>
-    <a href="#projects" data-lang-key="navProjects"></a>
-    <a href="#contact" data-lang-key="navContact"></a>
-    <div class="navbar-right">
-      <button id="themeToggle" class="icon-button"><i class="fas fa-moon"></i></button>
-      <div class="language-dropdown">
-        <button class="icon-button"><i class="fas fa-globe"></i></button>
-        <div class="dropdown-content">
-          <a href="#" class="lang-option" data-lang="zh-TW"></a>
-          <a href="#" class="lang-option" data-lang="en"></a>
+
+<div id="preloader">
+  <div class="pre-mark">CLC<span>.</span>DEV</div>
+  <div class="pre-counter"><b id="pre-pct">0</b>%</div>
+  <div class="pre-bar"><i id="pre-bar-fill"></i></div>
+</div>
+
+<div id="scroll-progress"></div>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <div class="nav-mark">CLC // MAX</div>
+  <div class="nav-links">
+    <a href="#about">ABOUT</a>
+    <a href="#work">PROJECTS</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#contact">CONTACT</a>
+    <a id="resume-link" href="#" target="_blank" rel="noopener" style="display:none;">RESUME</a>
+    <label class="theme-switch" id="theme-toggle" title="Toggle light / dark">
+      <input type="checkbox" id="theme-checkbox">
+      <span class="track"><span class="thumb"></span></span>
+    </label>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-eyebrow">NTUT · INTELLIGENT AUTOMATION ENGINEERING</div>
+  <h1>
+    <span><em>CHAO LIN</em></span>
+    <span><em>CHEN</em></span>
+  </h1>
+  <p class="hero-sub">Known as Max. Building embedded robots and edge-computing systems. President of NPC (NTUT Programming Club).</p>
+  <div class="scroll-cue"><div class="bar"></div>SCROLL</div>
+</section>
+
+<section id="about">
+  <div class="eyebrow">ABOUT</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm <span class="hl">Chao Lin Chen</span>, an Intelligent Automation Engineering student at National Taipei University of Technology. I like turning algorithms into things that actually move — from embedded firmware to robotics, from sensor data to <span class="hl">machine learning</span> models, I enjoy making systems work in the real world.</p>
+    </div>
+    <div class="role-card reveal">
+      <strong>Currently</strong>
+      President, NPC<br>
+      (NTUT Programming Club)<br><br>
+      <strong style="margin-top:14px;">Focus</strong>
+      Embedded Systems<br>
+      Robotics<br>
+      Machine Learning
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="eyebrow">PROJECTS</div>
+  <div id="projects-container"></div>
+</section>
+
+<section id="skills">
+  <div class="eyebrow">SKILLS</div>
+  <div class="skills-wrap reveal">
+    <div class="skill-pill">Python</div>
+    <div class="skill-pill">MATLAB</div>
+    <div class="skill-pill">Embedded Systems</div>
+    <div class="skill-pill">Raspberry Pi</div>
+    <div class="skill-pill">Arduino</div>
+    <div class="skill-pill">Machine Learning</div>
+    <div class="skill-pill">Computer Vision</div>
+    <div class="skill-pill">AI Augmented Development</div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="eyebrow">CONTACT</div>
+  <h2 class="reveal">Want to talk robots, embedded<br>systems, or collab on a project?<br><a href="mailto:mmmax.tw@gmail.com">Email me →</a></h2>
+  <div class="contact-grid reveal" id="contact-container"></div>
+</section>
+
+<div id="admin-trigger" title=""></div>
+
+<div class="admin-overlay" id="admin-overlay">
+  <div class="admin-panel">
+    <button class="admin-close" id="admin-close">&times;</button>
+
+    <div id="admin-gate" class="admin-pass-gate">
+      <h3>Admin Access</h3>
+      <div class="sub">Enter the site password to edit contacts, projects, and your resume link.</div>
+      <input type="password" id="admin-password" placeholder="Password" />
+      <button class="admin-btn" id="admin-login" style="width:100%;">Unlock</button>
+      <div class="sub" id="admin-error" style="color:#ff6e6e; display:none; margin-top:10px;">Incorrect password.</div>
+    </div>
+
+    <div id="admin-content" style="display:none;">
+      <h3>Site Admin</h3>
+      <div class="sub">Changes save to this browser only (localStorage). To publish for everyone, re-export and re-upload the file — see the note below.</div>
+
+      <div class="admin-block">
+        <h4>RESUME LINK</h4>
+        <div class="admin-row">
+          <input type="text" id="resume-input" placeholder="https://... link to your resume PDF" />
+          <button class="admin-btn" id="resume-save">Save</button>
         </div>
       </div>
+
+      <div class="admin-block">
+        <h4>CONTACT METHODS</h4>
+        <div id="admin-contact-list"></div>
+        <div class="admin-row">
+          <input type="text" id="contact-label" placeholder="Label (e.g. TWITTER)" style="max-width:140px;" />
+          <input type="text" id="contact-text" placeholder="Display text" />
+          <input type="text" id="contact-url" placeholder="Link (https:// or mailto:)" />
+          <button class="admin-btn" id="contact-add">Add</button>
+        </div>
+      </div>
+
+      <div class="admin-block">
+        <h4>PROJECTS / RESUME ENTRIES</h4>
+        <div id="admin-project-list"></div>
+        <div class="admin-row">
+          <input type="text" id="project-name" placeholder="Project name" />
+          <input type="text" id="project-tags" placeholder="Tags (e.g. PYTHON · ML)" />
+        </div>
+        <div class="admin-row">
+          <input type="text" id="project-desc" placeholder="Short description" />
+        </div>
+        <div class="admin-row">
+          <input type="text" id="project-url" placeholder="Link (https://...)" />
+          <button class="admin-btn" id="project-add">Add</button>
+        </div>
+      </div>
+
+      <div class="admin-block">
+        <h4>RESET</h4>
+        <button class="admin-btn danger" id="admin-reset">Reset all to defaults</button>
+      </div>
+
+      <button class="admin-btn" id="admin-logout" style="width:100%;">Lock admin</button>
     </div>
-  </nav>
+  </div>
 </div>
 
-<section class="hero-section">
-  <h1 data-lang-key="heroTitle"></h1>
-  <h2 data-lang-key="heroSubtitle"></h2>
-</section>
+<div id="project-preview">VIEW PROJECT ↗</div>
 
-<section id="about" class="about-section">
-  <h2 data-lang-key="aboutTitle"></h2>
-  <div class="content-card">
-    <div class="about-content-grid">
-      <div class="profile-image-container">
-        <img src="images/29221.jpg" alt="陳兆臨個人頭像" class="profile-image">
-      </div>
-      <div class="about-text-content">
-        <p data-lang-key="aboutContent"></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="projects-section">
-  <h2 data-lang-key="projectsTitle"></h2>
-<div class="project-grid">
-  <div class="content-card project-card">
-    <h3 data-lang-key="project1Title"></h3>
-    <p data-lang-key="project1Content"></p>
-  </div>
-  <div class="content-card project-card">
-    <h3 data-lang-key="project2Title"></h3>
-    <p data-lang-key="project2Content"></p>
-  </div>
-  <div class="content-card project-card">
-    <h3 data-lang-key="project3Title"></h3>
-    <p data-lang-key="project3Content"></p>
-  </div>
-</div>
-</section>
-
-<!-- START: contact section 聯絡我區塊的修改 -->
-<section id="contact" class="contact-section">
-  <h2 data-lang-key="contactTitle"></h2> <!-- 標題移到 content-card 外部 -->
-  <div class="content-card"> <!-- content-card 現在只包含內部的訊息 -->
-    <p data-lang-key="contactDescription"></p>
-    <button id="sendEmailBtn" class="btn-email" data-lang-key="contactBtn"></button>
-  </div>
-</section>
-<!-- END: contact section 聯絡我區塊的修改 -->
-
-<footer class="footer">
-  <div class="social-links">
-    <a href="https://github.com/Xyllence0122" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-    <a href="https://discordapp.com/users/1065557046109421629" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-  </div>
-  <p data-lang-key="footerText"></p>
+<footer>
+  <span>© 2026 CHAO LIN CHEN</span>
+  <span>NTUT · INTELLIGENT AUTOMATION ENGINEERING</span>
 </footer>
 
-<script src="/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  // ---- Hero 3D node network ----
+  const canvas = document.getElementById('hero-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth/window.innerHeight, 0.1, 100);
+  camera.position.set(0,0,9);
+
+  function resize(){
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // node network group (represents networked robotics / embedded nodes)
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const NODE_COUNT = 46;
+  const nodes = [];
+  const nodeGeo = new THREE.SphereGeometry(0.045, 8, 8);
+  const nodeMatAccent = new THREE.MeshBasicMaterial({ color: 0x6ef0d8 });
+  const nodeMatMuted = new THREE.MeshBasicMaterial({ color: 0x3a4450 });
+
+  for(let i=0;i<NODE_COUNT;i++){
+    const isAccent = Math.random() < 0.18;
+    const mesh = new THREE.Mesh(nodeGeo, isAccent ? nodeMatAccent : nodeMatMuted);
+    const r = 3.6 + Math.random()*1.4;
+    const theta = Math.random()*Math.PI*2;
+    const phi = Math.acos((Math.random()*2)-1);
+    mesh.position.set(
+      r*Math.sin(phi)*Math.cos(theta),
+      r*Math.sin(phi)*Math.sin(theta)*0.7,
+      r*Math.cos(phi)
+    );
+    mesh.userData.basePos = mesh.position.clone();
+    mesh.userData.speed = 0.2 + Math.random()*0.4;
+    mesh.userData.offset = Math.random()*Math.PI*2;
+    group.add(mesh);
+    nodes.push(mesh);
+  }
+
+  // connecting lines between nearby nodes
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x1d242c, transparent:true, opacity:0.7 });
+  const linePositions = [];
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      if(nodes[i].position.distanceTo(nodes[j].position) < 2.0 && Math.random() < 0.22){
+        linePositions.push(nodes[i].position.x, nodes[i].position.y, nodes[i].position.z);
+        linePositions.push(nodes[j].position.x, nodes[j].position.y, nodes[j].position.z);
+      }
+    }
+  }
+  const lineGeo = new THREE.BufferGeometry();
+  lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+  const lines = new THREE.LineSegments(lineGeo, lineMat);
+  group.add(lines);
+
+  group.rotation.x = 0.15;
+
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', (e)=>{
+    mouseX = (e.clientX/window.innerWidth - 0.5);
+    mouseY = (e.clientY/window.innerHeight - 0.5);
+  });
+
+  let scrollY = 0;
+  window.addEventListener('scroll', ()=>{ scrollY = window.scrollY; });
+
+  const clock = new THREE.Clock();
+  function animate(){
+    const t = clock.getElapsedTime();
+    group.rotation.y = t*0.06 + mouseX*0.4;
+    group.rotation.x = 0.15 + mouseY*0.25;
+    group.position.y = -scrollY*0.0015;
+
+    nodes.forEach(n=>{
+      const b = n.userData.basePos;
+      n.position.y = b.y + Math.sin(t*n.userData.speed + n.userData.offset)*0.12;
+    });
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // ---- scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal, .eyebrow');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, { threshold:0.15 });
+  revealEls.forEach(el=>io.observe(el));
+
+  // staggered skill pill reveal
+  const skillPills = document.querySelectorAll('.skill-pill');
+  skillPills.forEach((pill, i) => { pill.style.transitionDelay = `${i * 0.06}s`; });
+  const skillIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){
+      skillPills.forEach(p => p.classList.add('in'));
+      skillIo.disconnect();
+    }});
+  }, { threshold:0.2 });
+  if(skillPills.length) skillIo.observe(document.querySelector('.skills-wrap'));
+
+  // ---- custom magnetic cursor ----
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+  let cx = 0, cy = 0, rx = 0, ry = 0;
+  window.addEventListener('mousemove', (e) => {
+    cx = e.clientX; cy = e.clientY;
+    cursorDot.style.left = cx + 'px';
+    cursorDot.style.top = cy + 'px';
+  });
+  function cursorLoop(){
+    rx += (cx - rx) * 0.18;
+    ry += (cy - ry) * 0.18;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(cursorLoop);
+  }
+  cursorLoop();
+  document.addEventListener('mouseover', (e) => {
+    if(e.target.closest('a, button, .skill-pill, #admin-trigger')) cursorRing.classList.add('hovering');
+  });
+  document.addEventListener('mouseout', (e) => {
+    if(e.target.closest('a, button, .skill-pill, #admin-trigger')) cursorRing.classList.remove('hovering');
+  });
+
+  // (magnetic-pull hover effect removed — project rows now stay still on hover)
+
+  // ---- scroll progress bar ----
+  const progressBar = document.getElementById('scroll-progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    progressBar.style.width = (max > 0 ? (scrolled/max)*100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+
+  // fade the background canvas as the hero scrolls out of view
+  const heroEl = document.querySelector('.hero');
+  function updateCanvasOpacity(){
+    const heroHeight = heroEl.offsetHeight || window.innerHeight;
+    const fade = Math.max(0.12, 1 - (window.scrollY / heroHeight) * 0.85);
+    canvas.style.opacity = fade;
+  }
+  window.addEventListener('scroll', updateCanvasOpacity);
+  updateCanvasOpacity();
+
+  // ---- preloader ----
+  window.addEventListener('load', () => {
+    const pct = document.getElementById('pre-pct');
+    const fill = document.getElementById('pre-bar-fill');
+    const preloader = document.getElementById('preloader');
+    let n = 0;
+    const tick = setInterval(() => {
+      n += Math.ceil(Math.random()*18);
+      if(n >= 100){ n = 100; clearInterval(tick); }
+      pct.textContent = n;
+      fill.style.width = n + '%';
+      if(n === 100){
+        setTimeout(() => preloader.classList.add('hidden'), 280);
+      }
+    }, 70);
+  });
+  // safety: never let the preloader block the page for more than 2.5s
+  setTimeout(() => document.getElementById('preloader')?.classList.add('hidden'), 2500);
+
+  // ---- theme toggle (sliding switch) ----
+  const themeCheckbox = document.getElementById('theme-checkbox');
+  const THEME_KEY = 'clc_theme';
+  function applyTheme(theme){
+    if(theme === 'light'){
+      document.documentElement.setAttribute('data-theme','light');
+      themeCheckbox.checked = true;
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      themeCheckbox.checked = false;
+    }
+  }
+  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+  themeCheckbox.addEventListener('change', () => {
+    const next = themeCheckbox.checked ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem(THEME_KEY, next);
+  });
+
+  // ---- nav background on scroll ----
+  const navEl = document.querySelector('nav');
+  function updateNav(){
+    if(window.scrollY > 40) navEl.classList.add('scrolled');
+    else navEl.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+
+  // ---- project hover preview tag ----
+  const preview = document.getElementById('project-preview');
+  document.addEventListener('mousemove', (e) => {
+    if(e.target.closest('.project')){
+      preview.style.left = e.clientX + 'px';
+      preview.style.top = e.clientY + 'px';
+    }
+  });
+  document.addEventListener('mouseover', (e) => {
+    if(e.target.closest('.project')) preview.classList.add('show');
+  });
+  document.addEventListener('mouseout', (e) => {
+    const el = e.target.closest('.project');
+    if(el && !el.contains(e.relatedTarget)) preview.classList.remove('show');
+  });
+</script>
+
+<script>
+  /* =========================================================
+     SITE DATA + ADMIN PANEL
+     Edit DEFAULT_DATA below to permanently change the content
+     shipped to every visitor. The admin panel only changes
+     what's stored in YOUR browser (localStorage) — it does not
+     write back to this file or affect other visitors. Use it
+     to draft changes, then copy the values into DEFAULT_DATA
+     and re-save the file if you want them live for everyone.
+     ========================================================= */
+
+  const ADMIN_PASSWORD = "max2026"; // change this to your own password
+
+  const DEFAULT_DATA = {
+    resumeUrl: "",
+    contacts: [
+      { label:"EMAIL", text:"mmmax.tw@gmail.com", url:"mailto:mmmax.tw@gmail.com" },
+      { label:"DISCORD", text:"max.tw", url:"#" },
+      { label:"GITHUB", text:"Xyllence0122", url:"https://github.com/Xyllence0122" },
+      { label:"LINKEDIN", text:"Chao Lin Chen", url:"https://www.linkedin.com/in/%E5%85%86%E8%87%A8-%E9%99%B3-12a1a838b/" }
+    ],
+    projects: [
+      {
+        name:"Autonomous Mecanum Tracking Robot",
+        tags:"RASPBERRY PI 5 · ARDUINO MEGA 2560 · PYTHON",
+        desc:"Omnidirectional Mecanum chassis with real-time vision tracking for autonomous navigation and target following. Final project for a Python course.",
+        url:"https://github.com/Xyllence0122/Autonomous-Mecanum-Tracking-Robot"
+      }
+    ]
+  };
+
+  const STORAGE_KEY = "clc_site_data_v1";
+
+  function loadData(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return structuredClone(DEFAULT_DATA);
+      const parsed = JSON.parse(raw);
+      return {
+        resumeUrl: parsed.resumeUrl ?? "",
+        contacts: Array.isArray(parsed.contacts) ? parsed.contacts : DEFAULT_DATA.contacts,
+        projects: Array.isArray(parsed.projects) ? parsed.projects : DEFAULT_DATA.projects
+      };
+    }catch(e){
+      return structuredClone(DEFAULT_DATA);
+    }
+  }
+
+  function saveData(data){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  let siteData = loadData();
+
+  function renderSite(){
+    // resume link
+    const resumeLink = document.getElementById('resume-link');
+    if(siteData.resumeUrl){
+      resumeLink.href = siteData.resumeUrl;
+      resumeLink.style.display = '';
+    } else {
+      resumeLink.style.display = 'none';
+    }
+
+    // contacts
+    const contactContainer = document.getElementById('contact-container');
+    contactContainer.innerHTML = siteData.contacts.map(c => `
+      <div class="contact-item">
+        <span>${escapeHtml(c.label)}</span>
+        <a href="${escapeAttr(c.url)}" target="_blank" rel="noopener">${escapeHtml(c.text)}</a>
+      </div>
+    `).join('');
+
+    // projects
+    const projectContainer = document.getElementById('projects-container');
+    projectContainer.innerHTML = siteData.projects.map((p, i) => `
+      <a class="project reveal in" href="${escapeAttr(p.url || '#')}" target="_blank" rel="noopener">
+        <div class="project-index">${String(i+1).padStart(2,'0')}</div>
+        <div>
+          <div class="project-name">${escapeHtml(p.name)}</div>
+          <div class="project-tags">${escapeHtml(p.tags || '')}</div>
+        </div>
+        <div class="project-desc">${escapeHtml(p.desc || '')}</div>
+        <div class="project-arrow">↗</div>
+      </a>
+    `).join('');
+  }
+
+  function escapeHtml(str){
+    return (str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function escapeAttr(str){ return escapeHtml(str); }
+
+  renderSite();
+
+  // ---- admin panel ----
+  const overlay = document.getElementById('admin-overlay');
+  const gate = document.getElementById('admin-gate');
+  const content = document.getElementById('admin-content');
+  let unlocked = false;
+
+  document.getElementById('admin-trigger').addEventListener('click', () => {
+    overlay.classList.add('open');
+    if(unlocked){ openAdminContent(); }
+  });
+  document.getElementById('admin-close').addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.classList.remove('open'); });
+
+  document.getElementById('admin-login').addEventListener('click', tryLogin);
+  document.getElementById('admin-password').addEventListener('keydown', (e) => { if(e.key === 'Enter') tryLogin(); });
+
+  function tryLogin(){
+    const val = document.getElementById('admin-password').value;
+    if(val === ADMIN_PASSWORD){
+      unlocked = true;
+      document.getElementById('admin-error').style.display = 'none';
+      openAdminContent();
+    } else {
+      document.getElementById('admin-error').style.display = 'block';
+    }
+  }
+
+  function openAdminContent(){
+    gate.style.display = 'none';
+    content.style.display = 'block';
+    document.getElementById('resume-input').value = siteData.resumeUrl;
+    renderAdminLists();
+  }
+
+  document.getElementById('admin-logout').addEventListener('click', () => {
+    unlocked = false;
+    gate.style.display = 'block';
+    content.style.display = 'none';
+    document.getElementById('admin-password').value = '';
+  });
+
+  function renderAdminLists(){
+    const cList = document.getElementById('admin-contact-list');
+    cList.innerHTML = siteData.contacts.map((c, i) => `
+      <div class="admin-list-item">
+        <span>${escapeHtml(c.label)} — ${escapeHtml(c.text)}</span>
+        <button class="admin-btn danger" data-remove-contact="${i}">Remove</button>
+      </div>
+    `).join('');
+    cList.querySelectorAll('[data-remove-contact]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        siteData.contacts.splice(Number(btn.dataset.removeContact), 1);
+        saveData(siteData); renderSite(); renderAdminLists();
+      });
+    });
+
+    const pList = document.getElementById('admin-project-list');
+    pList.innerHTML = siteData.projects.map((p, i) => `
+      <div class="admin-list-item">
+        <span>${escapeHtml(p.name)}</span>
+        <button class="admin-btn danger" data-remove-project="${i}">Remove</button>
+      </div>
+    `).join('');
+    pList.querySelectorAll('[data-remove-project]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        siteData.projects.splice(Number(btn.dataset.removeProject), 1);
+        saveData(siteData); renderSite(); renderAdminLists();
+      });
+    });
+  }
+
+  document.getElementById('resume-save').addEventListener('click', () => {
+    siteData.resumeUrl = document.getElementById('resume-input').value.trim();
+    saveData(siteData); renderSite();
+  });
+
+  document.getElementById('contact-add').addEventListener('click', () => {
+    const label = document.getElementById('contact-label').value.trim();
+    const text = document.getElementById('contact-text').value.trim();
+    const url = document.getElementById('contact-url').value.trim();
+    if(!label || !text || !url) return;
+    siteData.contacts.push({ label: label.toUpperCase(), text, url });
+    saveData(siteData); renderSite(); renderAdminLists();
+    document.getElementById('contact-label').value = '';
+    document.getElementById('contact-text').value = '';
+    document.getElementById('contact-url').value = '';
+  });
+
+  document.getElementById('project-add').addEventListener('click', () => {
+    const name = document.getElementById('project-name').value.trim();
+    const tags = document.getElementById('project-tags').value.trim();
+    const desc = document.getElementById('project-desc').value.trim();
+    const url = document.getElementById('project-url').value.trim();
+    if(!name) return;
+    siteData.projects.push({ name, tags, desc, url });
+    saveData(siteData); renderSite(); renderAdminLists();
+    document.getElementById('project-name').value = '';
+    document.getElementById('project-tags').value = '';
+    document.getElementById('project-desc').value = '';
+    document.getElementById('project-url').value = '';
+  });
+
+  document.getElementById('admin-reset').addEventListener('click', () => {
+    if(!confirm('Reset all content back to the default values?')) return;
+    siteData = structuredClone(DEFAULT_DATA);
+    saveData(siteData); renderSite(); renderAdminLists();
+    document.getElementById('resume-input').value = siteData.resumeUrl;
+  });
+</script>
 </body>
 </html>
