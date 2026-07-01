@@ -1,19 +1,8 @@
-## Max Personal Website
+# Max Personal Website
 
-Hi! Welcome to my personal website. 🌟  
+Source code for my personal portfolio website.
 
-This site showcases my projects, skills, and learning journey as a student and developer. I explore areas like:
+The site showcases my projects, technical skills, and learning journey in software engineering, AI, robotics, embedded systems, and web development.
 
-- Frontend Development (HTML, CSS, JavaScript)  
-- 3D Modeling & Printing  
-- Information Security  
-
-## 🚀 What You Can Find Here
-- **Portfolio Projects**: Interactive demos and hands-on work  
-- **Skills Overview**: Tools and technologies I use  
-- **Contact Info**: Connect with me via GitHub, Discord, or email  
-
-## 🌐 Visit & Explore
-Check out the live site here: [Max98122 Website](https://xyllence0122.github.io)  
-
-Thanks for visiting! Hope you enjoy exploring my projects. 😊
+**Live Website:**
+https://xyllence0122.github.io
