@@ -83,7 +83,11 @@
     <a id="resume-link" href="#" target="_blank" rel="noopener" hidden>RESUME</a>
     <label class="theme-switch" title="Toggle light / dark theme">
       <input type="checkbox" id="theme-checkbox" aria-label="Switch to light theme">
-      <span class="track"><span class="thumb"></span></span>
+      <span class="track">
+        <span class="icon moon" aria-hidden="true">☾</span>
+        <span class="icon sun" aria-hidden="true">☀</span>
+        <span class="thumb"></span>
+      </span>
     </label>
   </div>
 </nav>
@@ -96,6 +100,10 @@
     <span><em>CHEN</em></span>
   </h1>
   <p class="hero-sub">Known as Max. Building embedded robots and edge-computing systems. President of NPC (NTUT Programming Club).</p>
+  <p class="visitor-counter" id="visitor-counter">
+    <span class="vc-dot" aria-hidden="true"></span>
+    YOU ARE VISITOR <b id="visitor-num">#——</b>
+  </p>
   <div class="scroll-cue" aria-hidden="true"><div class="bar"></div>SCROLL</div>
 </header>
 

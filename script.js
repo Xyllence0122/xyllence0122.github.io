@@ -324,6 +324,32 @@
   });
 
   /* =========================================================
+     6.5 Visitor counter
+     GitHub Pages is static, so the count lives on a free
+     public counter API (abacus.jasoncameron.dev). Each new
+     browser session increments the count once; reloads within
+     the same session just read the current value. If the API
+     is unreachable the element simply stays hidden.
+     ========================================================= */
+  var visitorEl = document.getElementById('visitor-counter');
+  var visitorNum = document.getElementById('visitor-num');
+  if (visitorEl && visitorNum && window.fetch) {
+    var VISIT_KEY = 'clc_visit_counted';
+    var alreadyCounted = false;
+    try { alreadyCounted = sessionStorage.getItem(VISIT_KEY) === '1'; } catch (e) {}
+
+    fetch('https://abacus.jasoncameron.dev/' + (alreadyCounted ? 'get' : 'hit') + '/xyllence0122-github-io/visits')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (typeof data.value !== 'number') return;
+        try { sessionStorage.setItem(VISIT_KEY, '1'); } catch (e) {}
+        visitorNum.textContent = '#' + String(data.value).padStart(6, '0');
+        visitorEl.classList.add('show');
+      })
+      .catch(function () { /* counter is decorative — fail silently */ });
+  }
+
+  /* =========================================================
      7. Mobile nav
      ========================================================= */
   var navToggle = document.getElementById('nav-toggle');
