@@ -95,7 +95,7 @@
     var cosY = Math.cos(rotY), sinY = Math.sin(rotY);
     var cosX = Math.cos(rotX), sinX = Math.sin(rotX);
     var focal = (vh / 2) / Math.tan(FOV / 2);
-    var cx2 = vw / 2, cy2 = vh / 2;
+    var cx2 = vw * 0.62, cy2 = vh / 2; // network sits right of center so it doesn't sit behind the hero text
 
     ctx.clearRect(0, 0, vw, vh);
 
