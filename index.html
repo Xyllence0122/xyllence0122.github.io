@@ -78,6 +78,7 @@
   <div class="nav-links" id="nav-links">
     <a href="#about">ABOUT</a>
     <a href="#work">PROJECTS</a>
+    <a href="#github">GITHUB</a>
     <a href="#skills">SKILLS</a>
     <a href="#contact">CONTACT</a>
     <a id="resume-link" href="#" target="_blank" rel="noopener" hidden>RESUME</a>
@@ -96,6 +97,7 @@
     <span><em>CHEN</em></span>
   </h1>
   <p class="hero-sub">Known as Max. Building embedded robots and edge-computing systems. President of NPC (NTUT Programming Club).</p>
+  <p class="hero-roles" aria-hidden="true">&gt;&nbsp;<span id="typed-role"></span><span class="type-caret">_</span></p>
   <p class="visitor-counter" id="visitor-counter">
     <span class="vc-dot" aria-hidden="true"></span>
     YOU ARE VISITOR <b id="visitor-num">#——</b>
@@ -127,6 +129,13 @@
     <div id="projects-container"></div>
   </section>
 
+  <section id="github">
+    <h2 class="eyebrow">GITHUB</h2>
+    <div class="gh-stats reveal" id="gh-stats" hidden></div>
+    <div class="gh-grid reveal" id="gh-repos"></div>
+    <p class="gh-fallback reveal" id="gh-fallback">Loading repositories… <a href="https://github.com/Xyllence0122" target="_blank" rel="noopener">Visit my GitHub →</a></p>
+  </section>
+
   <section id="skills">
     <h2 class="eyebrow">SKILLS</h2>
     <ul class="skills-wrap reveal">
@@ -144,6 +153,7 @@
   <section id="contact" class="contact">
     <h2 class="eyebrow">CONTACT</h2>
     <p class="contact-headline reveal">Want to talk robots, embedded<br>systems, or collab on a project?<br><a href="mailto:mmmax.tw@gmail.com">Email me →</a></p>
+    <button class="copy-email reveal" id="copy-email" data-email="mmmax.tw@gmail.com">COPY EMAIL ⧉</button>
     <div class="contact-grid reveal" id="contact-container"></div>
   </section>
 </main>
@@ -213,8 +223,12 @@
 
 <div id="project-preview" aria-hidden="true">VIEW PROJECT ↗</div>
 
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<div id="toast" role="status" aria-live="polite"></div>
+
 <footer>
   <span>© 2026 CHAO LIN CHEN</span>
+  <span id="local-time">TAIPEI ——:——</span>
   <span>NTUT · INTELLIGENT AUTOMATION ENGINEERING</span>
 </footer>
 

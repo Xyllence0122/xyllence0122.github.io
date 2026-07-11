@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | Chao Lin Chen (Max)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0d12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0d12'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='bold' fill='%236ef0d8' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<script>
+  (function(){
+    try{
+      if(localStorage.getItem('clc_theme') === 'light'){
+        document.documentElement.setAttribute('data-theme','light');
+      }
+    }catch(e){}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d12; --line:#1d242c; --text:#e9eef2; --muted:#6f7c89;
+    --accent:#6ef0d8; --glow:rgba(110,240,216,.35);
+  }
+  html[data-theme="light"]{
+    --bg:#f3f1ec; --line:#cfc9ba; --text:#16191c; --muted:#5d5c54;
+    --accent:#0b7f6b; --glow:rgba(11,127,107,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    min-height:100svh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:22px;
+    background:var(--bg); color:var(--text); text-align:center;
+    font-family:'JetBrains Mono', monospace; padding:24px;
+  }
+  .code{
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:clamp(90px, 22vw, 220px); line-height:1; letter-spacing:-0.03em;
+    color:var(--accent);
+  }
+  .msg{font-size:14px; letter-spacing:.1em; color:var(--muted); line-height:1.8;}
+  a{
+    display:inline-block; margin-top:8px; padding:12px 26px;
+    border:1px solid var(--accent); border-radius:999px;
+    color:var(--accent); text-decoration:none;
+    font-size:12px; letter-spacing:.12em;
+    transition:background .25s, color .25s, box-shadow .25s;
+  }
+  a:hover{background:var(--accent); color:var(--bg); box-shadow:0 8px 24px -8px var(--glow);}
+</style>
+</head>
+<body>
+  <div class="code">404</div>
+  <p class="msg">// SIGNAL LOST — this page doesn't exist<br>or has been moved somewhere else.</p>
+  <a href="/">← BACK TO HOME</a>
+</body>
+</html>

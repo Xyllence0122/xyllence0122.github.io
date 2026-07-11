@@ -350,6 +350,211 @@
   }
 
   /* =========================================================
+     6.6 Hero typewriter — cycles through focus areas
+     ========================================================= */
+  var typedEl = document.getElementById('typed-role');
+  var ROLES = ['EMBEDDED SYSTEMS', 'ROBOTICS', 'MACHINE LEARNING', 'COMPUTER VISION', 'NPC · PROGRAMMING CLUB'];
+  if (typedEl) {
+    if (prefersReducedMotion) {
+      typedEl.textContent = ROLES[0];
+    } else {
+      (function typeLoop(roleIdx, charIdx, deleting) {
+        var word = ROLES[roleIdx];
+        typedEl.textContent = word.slice(0, charIdx);
+        var delay;
+        if (!deleting && charIdx < word.length) {
+          charIdx++; delay = 55 + Math.random() * 60;
+        } else if (!deleting) {
+          deleting = true; delay = 2200; // pause on full word
+        } else if (charIdx > 0) {
+          charIdx--; delay = 28;
+        } else {
+          deleting = false; roleIdx = (roleIdx + 1) % ROLES.length; delay = 400;
+        }
+        setTimeout(function () { typeLoop(roleIdx, charIdx, deleting); }, delay);
+      })(0, 0, false);
+    }
+  }
+
+  /* =========================================================
+     6.7 Scroll spy — highlight the nav link of the section in view
+     ========================================================= */
+  var spyLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  var spyMap = {};
+  spyLinks.forEach(function (link) { spyMap[link.getAttribute('href').slice(1)] = link; });
+
+  var spyIo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      spyLinks.forEach(function (l) { l.classList.remove('active'); });
+      var link = spyMap[entry.target.id];
+      if (link) link.classList.add('active');
+    });
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  document.querySelectorAll('main section[id]').forEach(function (sec) { spyIo.observe(sec); });
+
+  /* =========================================================
+     6.8 GitHub activity — live repos + profile stats
+     Cached in sessionStorage to stay well under the 60 req/hr
+     unauthenticated API limit. Fails silently to a plain link.
+     ========================================================= */
+  var GH_USER = 'Xyllence0122';
+  var GH_CACHE_KEY = 'clc_gh_cache_v1';
+  var GH_CACHE_TTL = 30 * 60 * 1000; // 30 min
+
+  var ghStatsEl = document.getElementById('gh-stats');
+  var ghReposEl = document.getElementById('gh-repos');
+  var ghFallbackEl = document.getElementById('gh-fallback');
+
+  var LANG_COLORS = {
+    'Python': '#3572A5', 'C++': '#f34b7d', 'C': '#8f8f8f', 'JavaScript': '#f1e05a',
+    'TypeScript': '#3178c6', 'HTML': '#e34c26', 'CSS': '#563d7c',
+    'Jupyter Notebook': '#DA5B0B', 'MATLAB': '#e16737', 'Shell': '#89e051'
+  };
+
+  function timeAgo(iso) {
+    var days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+    if (days <= 0) return 'today';
+    if (days < 30) return days + 'd ago';
+    if (days < 365) return Math.floor(days / 30) + 'mo ago';
+    return Math.floor(days / 365) + 'y ago';
+  }
+
+  function renderGithub(data) {
+    var repos = data.repos.filter(function (r) { return !r.fork; });
+    var totalStars = repos.reduce(function (s, r) { return s + (r.stargazers_count || 0); }, 0);
+
+    ghStatsEl.innerHTML =
+      '<div class="gh-stat"><b>' + Number(data.user.public_repos || 0) + '</b>PUBLIC REPOS</div>' +
+      '<div class="gh-stat"><b>' + totalStars + '</b>TOTAL STARS</div>' +
+      '<div class="gh-stat"><b>' + Number(data.user.followers || 0) + '</b>FOLLOWERS</div>';
+    ghStatsEl.hidden = false;
+
+    ghReposEl.innerHTML = repos
+      .sort(function (a, b) { return new Date(b.pushed_at) - new Date(a.pushed_at); })
+      .slice(0, 6)
+      .map(function (r) {
+        var lang = r.language || '';
+        var dot = lang
+          ? '<span><span class="lang-dot" style="background:' + (LANG_COLORS[lang] || 'var(--accent)') + '"></span>' + escapeHtml(lang) + '</span>'
+          : '';
+        var stars = r.stargazers_count ? '<span>★ ' + r.stargazers_count + '</span>' : '';
+        return '<a class="repo-card" href="' + sanitizeUrl(r.html_url) + '" target="_blank" rel="noopener">' +
+          '<div class="repo-name">' + escapeHtml(r.name) + '</div>' +
+          '<div class="repo-desc">' + escapeHtml(r.description || 'No description yet.') + '</div>' +
+          '<div class="repo-meta">' + dot + stars + '<span>UPDATED ' + timeAgo(r.pushed_at).toUpperCase() + '</span></div>' +
+          '</a>';
+      }).join('');
+
+    ghFallbackEl.hidden = true;
+  }
+
+  if (ghStatsEl && ghReposEl && window.fetch) {
+    var ghCached = null;
+    try {
+      var rawCache = sessionStorage.getItem(GH_CACHE_KEY);
+      if (rawCache) {
+        var parsedCache = JSON.parse(rawCache);
+        if (Date.now() - parsedCache.at < GH_CACHE_TTL) ghCached = parsedCache.data;
+      }
+    } catch (e) {}
+
+    if (ghCached) {
+      renderGithub(ghCached);
+    } else {
+      Promise.all([
+        fetch('https://api.github.com/users/' + GH_USER).then(function (r) {
+          if (!r.ok) throw new Error(r.status); return r.json();
+        }),
+        fetch('https://api.github.com/users/' + GH_USER + '/repos?per_page=100').then(function (r) {
+          if (!r.ok) throw new Error(r.status); return r.json();
+        })
+      ]).then(function (res) {
+        // keep only the fields we render so the cache stays small
+        var data = {
+          user: { public_repos: res[0].public_repos, followers: res[0].followers },
+          repos: res[1].map(function (r) {
+            return {
+              name: r.name, description: r.description, html_url: r.html_url,
+              language: r.language, stargazers_count: r.stargazers_count,
+              pushed_at: r.pushed_at, fork: r.fork
+            };
+          })
+        };
+        try { sessionStorage.setItem(GH_CACHE_KEY, JSON.stringify({ at: Date.now(), data: data })); } catch (e) {}
+        renderGithub(data);
+      }).catch(function () {
+        ghFallbackEl.innerHTML = 'Couldn’t load repositories right now. <a href="https://github.com/' + GH_USER + '" target="_blank" rel="noopener">Visit my GitHub →</a>';
+      });
+    }
+  }
+
+  /* =========================================================
+     6.9 Back to top + copy email + toast + footer clock
+     ========================================================= */
+  var backToTop = document.getElementById('back-to-top');
+  if (backToTop) {
+    var btnTicking = false;
+    window.addEventListener('scroll', function () {
+      if (btnTicking) return;
+      btnTicking = true;
+      requestAnimationFrame(function () {
+        btnTicking = false;
+        backToTop.classList.toggle('show', window.scrollY > window.innerHeight * 0.8);
+      });
+    }, { passive: true });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2200);
+  }
+
+  var copyBtn = document.getElementById('copy-email');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var email = copyBtn.dataset.email;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(function () {
+          showToast('EMAIL COPIED — ' + email);
+        }).catch(function () { showToast(email); });
+      } else {
+        showToast(email);
+      }
+    });
+  }
+
+  var clockEl = document.getElementById('local-time');
+  if (clockEl) {
+    var updateClock = function () {
+      try {
+        clockEl.textContent = 'TAIPEI ' + new Intl.DateTimeFormat('en-GB', {
+          hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Taipei'
+        }).format(new Date());
+      } catch (e) {}
+    };
+    updateClock();
+    setInterval(updateClock, 30000);
+  }
+
+  // console easter egg for fellow devs
+  try {
+    console.log(
+      '%c CLC.DEV %c hey, fellow dev \u{1F44B} — source at github.com/' + GH_USER,
+      'background:#6ef0d8;color:#0a0d12;font-weight:bold;padding:4px 8px;border-radius:3px;',
+      'color:#6ef0d8;padding:4px 0;'
+    );
+  } catch (e) {}
+
+  /* =========================================================
      7. Mobile nav
      ========================================================= */
   var navToggle = document.getElementById('nav-toggle');
