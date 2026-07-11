@@ -405,6 +405,7 @@ section{position:relative; padding:140px 6vw; border-top:1px solid var(--line);}
   font-family:var(--display); font-weight:700;
   font-size:clamp(36px, 7vw, 90px); line-height:1.05; letter-spacing:-0.02em;
   max-width:900px;
+  text-wrap:balance; /* evens out line lengths where supported */
 }
 .contact-headline a{
   color:var(--accent); text-decoration:none;
@@ -439,11 +440,6 @@ section{position:relative; padding:140px 6vw; border-top:1px solid var(--line);}
 .contact-item a:hover{color:var(--accent); border-color:var(--accent);}
 @media (max-width:900px){.contact-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:500px){.contact-grid{grid-template-columns:1fr;}}
-.tz-note{
-  margin-top:56px;
-  font-family:var(--mono); font-size:12px; letter-spacing:.1em; color:var(--muted);
-}
-.tz-note span{color:var(--accent);}
 
 /* ---- project hover preview tag ---- */
 #project-preview{

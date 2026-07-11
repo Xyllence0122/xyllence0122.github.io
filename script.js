@@ -539,19 +539,6 @@
     });
   }
 
-  var clockEl = document.getElementById('local-time');
-  if (clockEl) {
-    var updateClock = function () {
-      try {
-        clockEl.textContent = new Intl.DateTimeFormat('en-GB', {
-          hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Taipei'
-        }).format(new Date());
-      } catch (e) {}
-    };
-    updateClock();
-    setInterval(updateClock, 30000);
-  }
-
   // console easter egg for fellow devs
   try {
     console.log(

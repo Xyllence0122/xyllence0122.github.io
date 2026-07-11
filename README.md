@@ -14,7 +14,7 @@ Personal portfolio of **Chao Lin Chen (Max)** — Intelligent Automation Enginee
 - **Decode animation** — section titles scramble into place as you scroll
 - **Scroll UX** — scroll-spy nav highlighting, progress bar, reveal animations
 - **Hidden admin panel** — password-gated panel (dot at the bottom-left) for drafting content changes in `localStorage` before publishing them
-- **Little touches** — visitor counter, live Taipei clock in the contact section, copy-email button with toast, console greeting for fellow devs
+- **Little touches** — visitor counter, copy-email button with toast, console greeting for fellow devs
 - **Accessible & respectful** — `prefers-reduced-motion` support everywhere, skip link, keyboard-friendly controls, semantic markup
 - **SEO ready** — structured data (JSON-LD), Open Graph tags, `sitemap.xml`, `robots.txt`, themed `404.html`
 
