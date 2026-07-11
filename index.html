@@ -81,6 +81,7 @@
     <a href="#skills">SKILLS</a>
     <a href="#contact">CONTACT</a>
     <a id="resume-link" href="#" target="_blank" rel="noopener" hidden>RESUME</a>
+    <button id="term-open" aria-haspopup="dialog" title="Open terminal">&gt;_</button>
     <label class="theme-switch" title="Toggle light / dark theme">
       <input type="checkbox" id="theme-checkbox" aria-label="Switch to light theme">
       <span class="track"><span class="thumb"></span></span>
@@ -113,6 +114,8 @@
       </div>
       <div class="role-card reveal">
         <strong>Currently</strong>
+        NTUT · Intelligent<br>
+        Automation Engineering<br><br>
         President, NPC<br>
         (NTUT Programming Club)<br><br>
         <strong>Focus</strong>
@@ -133,36 +136,16 @@
 
   <section id="skills">
     <h2 class="eyebrow">SKILLS</h2>
-    <div class="skills-groups">
-      <div class="skill-group reveal">
-        <h3>LANGUAGES</h3>
-        <ul class="skills-wrap">
-          <li class="skill-pill">Python</li>
-          <li class="skill-pill">MATLAB</li>
-        </ul>
-      </div>
-      <div class="skill-group reveal">
-        <h3>HARDWARE &amp; EMBEDDED</h3>
-        <ul class="skills-wrap">
-          <li class="skill-pill">Embedded Systems</li>
-          <li class="skill-pill">Raspberry Pi</li>
-          <li class="skill-pill">Arduino</li>
-        </ul>
-      </div>
-      <div class="skill-group reveal">
-        <h3>AI &amp; VISION</h3>
-        <ul class="skills-wrap">
-          <li class="skill-pill">Machine Learning</li>
-          <li class="skill-pill">Computer Vision</li>
-        </ul>
-      </div>
-      <div class="skill-group reveal">
-        <h3>WORKFLOW</h3>
-        <ul class="skills-wrap">
-          <li class="skill-pill">AI Augmented Development</li>
-        </ul>
-      </div>
-    </div>
+    <ul class="skills-wrap reveal">
+      <li class="skill-pill">Python</li>
+      <li class="skill-pill">MATLAB</li>
+      <li class="skill-pill">Embedded Systems</li>
+      <li class="skill-pill">Raspberry Pi</li>
+      <li class="skill-pill">Arduino</li>
+      <li class="skill-pill">Machine Learning</li>
+      <li class="skill-pill">Computer Vision</li>
+      <li class="skill-pill">AI Augmented Development</li>
+    </ul>
   </section>
 
   <section id="contact" class="contact">
@@ -170,6 +153,7 @@
     <p class="contact-headline reveal">Want to talk robots, embedded<br>systems, or collab on a project?<br><a href="mailto:mmmax.tw@gmail.com">Email me →</a></p>
     <button class="copy-email reveal" id="copy-email" data-email="mmmax.tw@gmail.com">COPY EMAIL ⧉</button>
     <div class="contact-grid reveal" id="contact-container"></div>
+    <p class="tz-note reveal">// MY LOCAL TIME — TAIPEI <span id="local-time">——:——</span></p>
   </section>
 </main>
 
@@ -238,7 +222,6 @@
 
 <div id="project-preview" aria-hidden="true">VIEW PROJECT ↗</div>
 
-<button id="back-to-top" aria-label="Back to top">↑</button>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <div id="terminal" hidden>
@@ -258,10 +241,6 @@
 
 <footer>
   <span>© 2026 CHAO LIN CHEN</span>
-  <span id="local-time">TAIPEI ——:——</span>
-  <span id="site-updated" hidden></span>
-  <button id="term-open" aria-haspopup="dialog">&gt;_ TERMINAL</button>
-  <span>NTUT · INTELLIGENT AUTOMATION ENGINEERING</span>
 </footer>
 
 <script src="script.js" defer></script>

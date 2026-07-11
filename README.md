@@ -8,13 +8,13 @@ Personal portfolio of **Chao Lin Chen (Max)** — Intelligent Automation Enginee
 
 - **3D node-network hero** — an animated point/line network rendered on a plain `<canvas>` with a few KB of math (no Three.js, no dependencies), reacting to mouse and scroll
 - **Auto-synced projects** — featured projects are curated by hand, and the rest of my public GitHub repos are pulled live from the GitHub API (session-cached, graceful fallback)
-- **Terminal easter egg** — press <kbd>`</kbd> or click `>_ TERMINAL` in the footer, then type `help` 👀
+- **Terminal easter egg** — press <kbd>`</kbd> or click `>_` in the nav, then type `help` 👀
 - **Light / dark theme** — persistent, flash-free on reload, synced to the hero canvas palette
 - **Typewriter hero line** — cycles through my focus areas
 - **Decode animation** — section titles scramble into place as you scroll
-- **Scroll UX** — scroll-spy nav highlighting, progress bar, reveal animations, back-to-top
+- **Scroll UX** — scroll-spy nav highlighting, progress bar, reveal animations
 - **Hidden admin panel** — password-gated panel (dot at the bottom-left) for drafting content changes in `localStorage` before publishing them
-- **Little touches** — visitor counter, live Taipei clock, "site updated" badge from the GitHub API, copy-email button with toast, console greeting for fellow devs
+- **Little touches** — visitor counter, live Taipei clock in the contact section, copy-email button with toast, console greeting for fellow devs
 - **Accessible & respectful** — `prefers-reduced-motion` support everywhere, skip link, keyboard-friendly controls, semantic markup
 - **SEO ready** — structured data (JSON-LD), Open Graph tags, `sitemap.xml`, `robots.txt`, themed `404.html`
 

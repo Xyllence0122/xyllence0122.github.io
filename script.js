@@ -244,7 +244,7 @@
   skillPills.forEach(function (pill, i) {
     pill.style.transitionDelay = (i * 0.06) + 's';
   });
-  var skillsWrap = document.querySelector('.skills-groups') || document.querySelector('.skills-wrap');
+  var skillsWrap = document.querySelector('.skills-wrap');
   if (skillsWrap && skillPills.length) {
     var skillIo = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting) {
@@ -331,7 +331,7 @@
     else document.documentElement.removeAttribute('data-theme');
     themeCheckbox.checked = light;
     themeCheckbox.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
-    if (themeMeta) themeMeta.setAttribute('content', light ? '#f3f1ec' : '#0a0d12');
+    if (themeMeta) themeMeta.setAttribute('content', light ? '#f6f8fa' : '#0a0d12');
     refreshColors(); // keep the hero canvas palette in sync
     if (prefersReducedMotion) drawFrame(0);
   }
@@ -445,14 +445,6 @@
   }
 
   function renderRepos(repos) {
-    // footer "site updated" badge, from this site's own repo
-    var updEl = document.getElementById('site-updated');
-    var siteRepo = repos.filter(function (r) { return /\.github\.io$/i.test(r.name); })[0];
-    if (updEl && siteRepo) {
-      updEl.textContent = 'SITE UPDATED ' + timeAgo(siteRepo.pushed_at).toUpperCase();
-      updEl.hidden = false;
-    }
-
     // skip forks and repos already shown as featured projects
     var featured = {};
     siteData.projects.forEach(function (p) {
@@ -521,24 +513,8 @@
   }
 
   /* =========================================================
-     6.9 Back to top + copy email + toast + footer clock
+     6.9 Copy email + toast + Taipei clock
      ========================================================= */
-  var backToTop = document.getElementById('back-to-top');
-  if (backToTop) {
-    var btnTicking = false;
-    window.addEventListener('scroll', function () {
-      if (btnTicking) return;
-      btnTicking = true;
-      requestAnimationFrame(function () {
-        btnTicking = false;
-        backToTop.classList.toggle('show', window.scrollY > window.innerHeight * 0.8);
-      });
-    }, { passive: true });
-    backToTop.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    });
-  }
-
   var toastEl = document.getElementById('toast');
   var toastTimer = null;
   function showToast(msg) {
@@ -567,7 +543,7 @@
   if (clockEl) {
     var updateClock = function () {
       try {
-        clockEl.textContent = 'TAIPEI ' + new Intl.DateTimeFormat('en-GB', {
+        clockEl.textContent = new Intl.DateTimeFormat('en-GB', {
           hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Taipei'
         }).format(new Date());
       } catch (e) {}
