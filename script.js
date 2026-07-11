@@ -207,10 +207,33 @@
   /* =========================================================
      3. Scroll reveal + staggered skill pills
      ========================================================= */
+  // "decode" scramble effect for section titles as they reveal
+  var SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#';
+  function scrambleText(el) {
+    if (prefersReducedMotion) return;
+    var finalText = el.textContent;
+    var totalFrames = Math.max(14, finalText.length * 3);
+    var frame = 0;
+    (function step() {
+      var settled = (frame / totalFrames) * finalText.length * 1.4;
+      var out = '';
+      for (var i = 0; i < finalText.length; i++) {
+        out += i < settled || finalText[i] === ' '
+          ? finalText[i]
+          : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+      }
+      el.textContent = out;
+      frame++;
+      if (frame <= totalFrames) requestAnimationFrame(step);
+      else el.textContent = finalText;
+    })();
+  }
+
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('in');
+        if (entry.target.classList.contains('eyebrow')) scrambleText(entry.target);
         io.unobserve(entry.target);
       }
     });
@@ -221,7 +244,7 @@
   skillPills.forEach(function (pill, i) {
     pill.style.transitionDelay = (i * 0.06) + 's';
   });
-  var skillsWrap = document.querySelector('.skills-wrap');
+  var skillsWrap = document.querySelector('.skills-groups') || document.querySelector('.skills-wrap');
   if (skillsWrap && skillPills.length) {
     var skillIo = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting) {
@@ -394,17 +417,18 @@
   document.querySelectorAll('main section[id]').forEach(function (sec) { spyIo.observe(sec); });
 
   /* =========================================================
-     6.8 GitHub activity — live repos + profile stats
+     6.8 GitHub repos — auto-synced into the PROJECTS section
+     Repos already listed as featured projects are skipped.
      Cached in sessionStorage to stay well under the 60 req/hr
      unauthenticated API limit. Fails silently to a plain link.
      ========================================================= */
   var GH_USER = 'Xyllence0122';
-  var GH_CACHE_KEY = 'clc_gh_cache_v1';
+  var GH_CACHE_KEY = 'clc_gh_cache_v2';
   var GH_CACHE_TTL = 30 * 60 * 1000; // 30 min
 
-  var ghStatsEl = document.getElementById('gh-stats');
   var ghReposEl = document.getElementById('gh-repos');
   var ghFallbackEl = document.getElementById('gh-fallback');
+  var ghMoreLabel = document.getElementById('gh-more-label');
 
   var LANG_COLORS = {
     'Python': '#3572A5', 'C++': '#f34b7d', 'C': '#8f8f8f', 'JavaScript': '#f1e05a',
@@ -420,72 +444,79 @@
     return Math.floor(days / 365) + 'y ago';
   }
 
-  function renderGithub(data) {
-    var repos = data.repos.filter(function (r) { return !r.fork; });
-    var totalStars = repos.reduce(function (s, r) { return s + (r.stargazers_count || 0); }, 0);
+  function renderRepos(repos) {
+    // footer "site updated" badge, from this site's own repo
+    var updEl = document.getElementById('site-updated');
+    var siteRepo = repos.filter(function (r) { return /\.github\.io$/i.test(r.name); })[0];
+    if (updEl && siteRepo) {
+      updEl.textContent = 'SITE UPDATED ' + timeAgo(siteRepo.pushed_at).toUpperCase();
+      updEl.hidden = false;
+    }
 
-    ghStatsEl.innerHTML =
-      '<div class="gh-stat"><b>' + Number(data.user.public_repos || 0) + '</b>PUBLIC REPOS</div>' +
-      '<div class="gh-stat"><b>' + totalStars + '</b>TOTAL STARS</div>' +
-      '<div class="gh-stat"><b>' + Number(data.user.followers || 0) + '</b>FOLLOWERS</div>';
-    ghStatsEl.hidden = false;
+    // skip forks and repos already shown as featured projects
+    var featured = {};
+    siteData.projects.forEach(function (p) {
+      featured[String(p.url || '').toLowerCase().replace(/\/+$/, '')] = true;
+    });
+    var list = repos.filter(function (r) {
+      return !r.fork && !featured[String(r.html_url || '').toLowerCase().replace(/\/+$/, '')];
+    }).sort(function (a, b) { return new Date(b.pushed_at) - new Date(a.pushed_at); }).slice(0, 6);
 
-    ghReposEl.innerHTML = repos
-      .sort(function (a, b) { return new Date(b.pushed_at) - new Date(a.pushed_at); })
-      .slice(0, 6)
-      .map(function (r) {
-        var lang = r.language || '';
-        var dot = lang
-          ? '<span><span class="lang-dot" style="background:' + (LANG_COLORS[lang] || 'var(--accent)') + '"></span>' + escapeHtml(lang) + '</span>'
-          : '';
-        var stars = r.stargazers_count ? '<span>★ ' + r.stargazers_count + '</span>' : '';
-        return '<a class="repo-card" href="' + sanitizeUrl(r.html_url) + '" target="_blank" rel="noopener">' +
-          '<div class="repo-name">' + escapeHtml(r.name) + '</div>' +
-          '<div class="repo-desc">' + escapeHtml(r.description || 'No description yet.') + '</div>' +
-          '<div class="repo-meta">' + dot + stars + '<span>UPDATED ' + timeAgo(r.pushed_at).toUpperCase() + '</span></div>' +
-          '</a>';
-      }).join('');
+    if (!list.length) {
+      ghFallbackEl.innerHTML = '<a href="https://github.com/' + GH_USER + '" target="_blank" rel="noopener">See everything on GitHub →</a>';
+      return;
+    }
 
+    ghReposEl.innerHTML = list.map(function (r) {
+      var lang = r.language || '';
+      var dot = lang
+        ? '<span><span class="lang-dot" style="background:' + (LANG_COLORS[lang] || 'var(--accent)') + '"></span>' + escapeHtml(lang) + '</span>'
+        : '';
+      var stars = r.stargazers_count ? '<span>★ ' + r.stargazers_count + '</span>' : '';
+      return '<a class="repo-card" href="' + sanitizeUrl(r.html_url) + '" target="_blank" rel="noopener">' +
+        '<div class="repo-name">' + escapeHtml(r.name) + '</div>' +
+        '<div class="repo-desc">' + escapeHtml(r.description || 'No description yet.') + '</div>' +
+        '<div class="repo-meta">' + dot + stars + '<span>UPDATED ' + timeAgo(r.pushed_at).toUpperCase() + '</span></div>' +
+        '</a>';
+    }).join('');
+
+    ghMoreLabel.hidden = false;
     ghFallbackEl.hidden = true;
   }
 
-  if (ghStatsEl && ghReposEl && window.fetch) {
+  if (ghReposEl && window.fetch) {
     var ghCached = null;
     try {
       var rawCache = sessionStorage.getItem(GH_CACHE_KEY);
       if (rawCache) {
         var parsedCache = JSON.parse(rawCache);
-        if (Date.now() - parsedCache.at < GH_CACHE_TTL) ghCached = parsedCache.data;
+        if (Date.now() - parsedCache.at < GH_CACHE_TTL) ghCached = parsedCache.repos;
       }
     } catch (e) {}
 
     if (ghCached) {
-      renderGithub(ghCached);
+      // defer one microtask so siteData (defined below) exists before rendering
+      Promise.resolve().then(function () { renderRepos(ghCached); });
     } else {
-      Promise.all([
-        fetch('https://api.github.com/users/' + GH_USER).then(function (r) {
-          if (!r.ok) throw new Error(r.status); return r.json();
-        }),
-        fetch('https://api.github.com/users/' + GH_USER + '/repos?per_page=100').then(function (r) {
+      fetch('https://api.github.com/users/' + GH_USER + '/repos?per_page=100')
+        .then(function (r) {
           if (!r.ok) throw new Error(r.status); return r.json();
         })
-      ]).then(function (res) {
-        // keep only the fields we render so the cache stays small
-        var data = {
-          user: { public_repos: res[0].public_repos, followers: res[0].followers },
-          repos: res[1].map(function (r) {
+        .then(function (raw) {
+          // keep only the fields we render so the cache stays small
+          var repos = raw.map(function (r) {
             return {
               name: r.name, description: r.description, html_url: r.html_url,
               language: r.language, stargazers_count: r.stargazers_count,
               pushed_at: r.pushed_at, fork: r.fork
             };
-          })
-        };
-        try { sessionStorage.setItem(GH_CACHE_KEY, JSON.stringify({ at: Date.now(), data: data })); } catch (e) {}
-        renderGithub(data);
-      }).catch(function () {
-        ghFallbackEl.innerHTML = 'Couldn’t load repositories right now. <a href="https://github.com/' + GH_USER + '" target="_blank" rel="noopener">Visit my GitHub →</a>';
-      });
+          });
+          try { sessionStorage.setItem(GH_CACHE_KEY, JSON.stringify({ at: Date.now(), repos: repos })); } catch (e) {}
+          renderRepos(repos);
+        })
+        .catch(function () {
+          ghFallbackEl.innerHTML = 'Couldn’t load repos right now. <a href="https://github.com/' + GH_USER + '" target="_blank" rel="noopener">See everything on GitHub →</a>';
+        });
     }
   }
 
@@ -799,4 +830,113 @@
     saveData(siteData); renderSite(); renderAdminLists();
     document.getElementById('resume-input').value = siteData.resumeUrl;
   });
+
+  /* =========================================================
+     9. Terminal easter egg
+     Open with the ` (backtick) key or the ">_ TERMINAL" button
+     in the footer. Type "help" for the command list.
+     ========================================================= */
+  var termOverlay = document.getElementById('terminal');
+  var termBody = document.getElementById('term-body');
+  var termInput = document.getElementById('term-input');
+  var termForm = document.getElementById('term-form');
+
+  if (termOverlay && termBody && termInput && termForm) {
+    var termBooted = false;
+
+    var termPrint = function (text, cls) {
+      var line = document.createElement('div');
+      if (cls) line.className = cls;
+      line.textContent = text;
+      termBody.appendChild(line);
+      termBody.scrollTop = termBody.scrollHeight;
+    };
+
+    var openTerm = function () {
+      termOverlay.hidden = false;
+      if (!termBooted) {
+        termBooted = true;
+        termPrint('CLC.DEV terminal — welcome, visitor.', 't-muted');
+        termPrint('Type "help" to see what I can do.', 't-muted');
+      }
+      termInput.focus();
+    };
+    var closeTerm = function () { termOverlay.hidden = true; };
+
+    var TERM_CMDS = {
+      help: function () {
+        termPrint('available commands:');
+        termPrint('  about      who is Max?');
+        termPrint('  projects   list featured projects');
+        termPrint('  skills     list skills');
+        termPrint('  contact    how to reach me');
+        termPrint('  github     my GitHub profile');
+        termPrint('  theme      toggle light / dark');
+        termPrint('  whoami     who are YOU?');
+        termPrint('  date       current date & time');
+        termPrint('  clear      clear the screen');
+        termPrint('  exit       close the terminal');
+      },
+      about: function () {
+        termPrint('Chao Lin Chen (Max) — Intelligent Automation Engineering @ NTUT.');
+        termPrint('President of NPC (NTUT Programming Club).');
+        termPrint('Building embedded robots and edge-computing systems.');
+      },
+      projects: function () {
+        siteData.projects.forEach(function (p, i) {
+          termPrint(String(i + 1).padStart(2, '0') + '  ' + p.name);
+          if (p.url) termPrint('    ' + p.url, 't-muted');
+        });
+        termPrint('more on github.com/' + GH_USER, 't-muted');
+      },
+      skills: function () {
+        var pills = Array.prototype.map.call(document.querySelectorAll('.skill-pill'), function (el) {
+          return el.textContent;
+        });
+        termPrint(pills.join(' · '));
+      },
+      contact: function () {
+        siteData.contacts.forEach(function (c) {
+          termPrint(c.label.padEnd(10) + c.text);
+        });
+      },
+      github: function () { termPrint('https://github.com/' + GH_USER); },
+      theme: function () {
+        themeCheckbox.click();
+        termPrint('theme switched to ' + (themeCheckbox.checked ? 'light' : 'dark') + '.');
+      },
+      whoami: function () { termPrint('guest — hi there, thanks for poking around.'); },
+      date: function () { termPrint(new Date().toString()); },
+      clear: function () { termBody.innerHTML = ''; },
+      sudo: function () { termPrint('nice try.'); },
+      exit: function () { closeTerm(); }
+    };
+    TERM_CMDS.quit = TERM_CMDS.exit;
+    TERM_CMDS.ls = TERM_CMDS.projects;
+
+    termForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var raw = termInput.value.trim();
+      termInput.value = '';
+      if (!raw) return;
+      termPrint('max@clc.dev:~$ ' + raw, 't-cmd');
+      var cmd = raw.toLowerCase().split(/\s+/)[0];
+      if (TERM_CMDS[cmd]) TERM_CMDS[cmd]();
+      else termPrint('command not found: ' + cmd + ' — try "help"');
+    });
+
+    document.getElementById('term-open').addEventListener('click', openTerm);
+    document.getElementById('term-close').addEventListener('click', closeTerm);
+    termOverlay.addEventListener('click', function (e) { if (e.target === termOverlay) closeTerm(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '`' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        var tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea') return;
+        e.preventDefault();
+        if (termOverlay.hidden) openTerm(); else closeTerm();
+      }
+      if (e.key === 'Escape' && !termOverlay.hidden) closeTerm();
+    });
+  }
 })();

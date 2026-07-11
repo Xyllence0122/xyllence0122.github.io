@@ -78,7 +78,6 @@
   <div class="nav-links" id="nav-links">
     <a href="#about">ABOUT</a>
     <a href="#work">PROJECTS</a>
-    <a href="#github">GITHUB</a>
     <a href="#skills">SKILLS</a>
     <a href="#contact">CONTACT</a>
     <a id="resume-link" href="#" target="_blank" rel="noopener" hidden>RESUME</a>
@@ -127,27 +126,43 @@
   <section id="work">
     <h2 class="eyebrow">PROJECTS</h2>
     <div id="projects-container"></div>
-  </section>
-
-  <section id="github">
-    <h2 class="eyebrow">GITHUB</h2>
-    <div class="gh-stats reveal" id="gh-stats" hidden></div>
+    <p class="gh-more-label" id="gh-more-label" hidden>// MORE ON GITHUB — SYNCED AUTOMATICALLY</p>
     <div class="gh-grid reveal" id="gh-repos"></div>
-    <p class="gh-fallback reveal" id="gh-fallback">Loading repositories… <a href="https://github.com/Xyllence0122" target="_blank" rel="noopener">Visit my GitHub →</a></p>
+    <p class="gh-fallback" id="gh-fallback">Loading more from GitHub… <a href="https://github.com/Xyllence0122" target="_blank" rel="noopener">See everything on GitHub →</a></p>
   </section>
 
   <section id="skills">
     <h2 class="eyebrow">SKILLS</h2>
-    <ul class="skills-wrap reveal">
-      <li class="skill-pill">Python</li>
-      <li class="skill-pill">MATLAB</li>
-      <li class="skill-pill">Embedded Systems</li>
-      <li class="skill-pill">Raspberry Pi</li>
-      <li class="skill-pill">Arduino</li>
-      <li class="skill-pill">Machine Learning</li>
-      <li class="skill-pill">Computer Vision</li>
-      <li class="skill-pill">AI Augmented Development</li>
-    </ul>
+    <div class="skills-groups">
+      <div class="skill-group reveal">
+        <h3>LANGUAGES</h3>
+        <ul class="skills-wrap">
+          <li class="skill-pill">Python</li>
+          <li class="skill-pill">MATLAB</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>HARDWARE &amp; EMBEDDED</h3>
+        <ul class="skills-wrap">
+          <li class="skill-pill">Embedded Systems</li>
+          <li class="skill-pill">Raspberry Pi</li>
+          <li class="skill-pill">Arduino</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>AI &amp; VISION</h3>
+        <ul class="skills-wrap">
+          <li class="skill-pill">Machine Learning</li>
+          <li class="skill-pill">Computer Vision</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <h3>WORKFLOW</h3>
+        <ul class="skills-wrap">
+          <li class="skill-pill">AI Augmented Development</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section id="contact" class="contact">
@@ -226,9 +241,26 @@
 <button id="back-to-top" aria-label="Back to top">↑</button>
 <div id="toast" role="status" aria-live="polite"></div>
 
+<div id="terminal" hidden>
+  <div class="term-window" role="dialog" aria-modal="true" aria-label="Interactive terminal">
+    <div class="term-bar">
+      <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      max@clc.dev — type <b>help</b>
+      <button id="term-close" aria-label="Close terminal">&times;</button>
+    </div>
+    <div class="term-body" id="term-body"></div>
+    <form id="term-form" class="term-input-row">
+      <label for="term-input">max@clc.dev:~$</label>
+      <input id="term-input" autocomplete="off" spellcheck="false" autocapitalize="off">
+    </form>
+  </div>
+</div>
+
 <footer>
   <span>© 2026 CHAO LIN CHEN</span>
   <span id="local-time">TAIPEI ——:——</span>
+  <span id="site-updated" hidden></span>
+  <button id="term-open" aria-haspopup="dialog">&gt;_ TERMINAL</button>
   <span>NTUT · INTELLIGENT AUTOMATION ENGINEERING</span>
 </footer>
 

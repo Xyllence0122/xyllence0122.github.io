@@ -327,20 +327,12 @@ section{position:relative; padding:140px 6vw; border-top:1px solid var(--line);}
   .project-arrow{display:none;}
 }
 
-/* ---- github ---- */
-.gh-stats{
-  display:flex; flex-wrap:wrap; gap:14px; margin-bottom:40px;
-  font-family:var(--mono); font-size:12px; letter-spacing:.08em;
+/* ---- auto-synced GitHub repos (inside projects) ---- */
+.gh-more-label{
+  margin:72px 0 28px;
+  font-family:var(--mono); font-size:12px; letter-spacing:.12em; color:var(--muted);
 }
-.gh-stats[hidden]{display:none;}
-.gh-stat{
-  border:1px solid var(--line); border-radius:2px; padding:14px 20px;
-  color:var(--muted);
-}
-.gh-stat b{
-  display:block; color:var(--accent); font-size:22px; font-weight:500;
-  font-family:var(--display); margin-bottom:4px;
-}
+.gh-more-label[hidden]{display:none;}
 .gh-grid{
   display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:20px;
 }
@@ -371,6 +363,7 @@ section{position:relative; padding:140px 6vw; border-top:1px solid var(--line);}
   margin-right:6px; vertical-align:-1px; background:var(--accent);
 }
 .gh-fallback{
+  margin-top:48px;
   font-family:var(--mono); font-size:13px; color:var(--muted); letter-spacing:.04em;
 }
 .gh-fallback a{color:var(--accent); text-decoration:none;}
@@ -378,6 +371,11 @@ section{position:relative; padding:140px 6vw; border-top:1px solid var(--line);}
 .gh-fallback[hidden]{display:none;}
 
 /* ---- skills ---- */
+.skills-groups{display:grid; gap:44px;}
+.skill-group h3{
+  font-family:var(--mono); font-size:11px; font-weight:400; letter-spacing:.15em;
+  color:var(--muted); margin-bottom:16px;
+}
 .skills-wrap{display:flex; flex-wrap:wrap; gap:14px;}
 .skill-pill{
   font-family:var(--mono); font-size:13px; padding:12px 20px;
@@ -460,6 +458,58 @@ section{position:relative; padding:140px 6vw; border-top:1px solid var(--line);}
 @media (hover:none), (pointer:coarse){
   #project-preview{display:none;}
 }
+
+/* ---- terminal easter egg ---- */
+#terminal{
+  position:fixed; inset:0; z-index:350; background:var(--overlay);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center; padding:24px;
+}
+#terminal[hidden]{display:none;}
+.term-window{
+  width:100%; max-width:640px; height:min(440px, 72vh);
+  display:flex; flex-direction:column;
+  background:var(--bg-soft); border:1px solid var(--line); border-radius:6px;
+  overflow:hidden; font-family:var(--mono); font-size:13px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+}
+.term-bar{
+  display:flex; align-items:center; gap:12px; padding:10px 14px;
+  border-bottom:1px solid var(--line);
+  color:var(--muted); font-size:11px; letter-spacing:.06em;
+}
+.term-bar b{color:var(--accent); font-weight:500;}
+.term-dots{display:inline-flex; gap:6px;}
+.term-dots i{width:10px; height:10px; border-radius:50%; background:var(--line);}
+.term-dots i:nth-child(1){background:var(--danger);}
+.term-dots i:nth-child(2){background:#e0b34c;}
+.term-dots i:nth-child(3){background:var(--accent);}
+#term-close{
+  margin-left:auto; background:none; border:none; color:var(--muted);
+  font-size:18px; cursor:pointer; line-height:1;
+}
+#term-close:hover{color:var(--text);}
+.term-body{
+  flex:1; padding:14px; overflow-y:auto; line-height:1.7;
+  white-space:pre-wrap; overflow-wrap:anywhere;
+}
+.term-body .t-cmd{color:var(--accent);}
+.term-body .t-muted{color:var(--muted);}
+.term-input-row{
+  display:flex; gap:8px; align-items:center;
+  padding:12px 14px; border-top:1px solid var(--line);
+}
+.term-input-row label{color:var(--accent); white-space:nowrap;}
+.term-input-row input{
+  flex:1; background:none; border:none; outline:none;
+  color:var(--text); font-family:var(--mono); font-size:13px; caret-color:var(--accent);
+}
+#term-open{
+  background:none; border:none; padding:0; cursor:pointer;
+  font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em;
+  transition:color .3s;
+}
+#term-open:hover{color:var(--accent);}
 
 /* ---- back to top ---- */
 #back-to-top{
